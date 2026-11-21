@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: cc47da4e312e9c74bbe46187e5297ef7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 212239
+  packageName: Elegant Racing Garage - Mobile Ready
+  packageVersion: 1.0
+  assetPath: Assets/ElegantGarage/Prefabs/ParticleDust.prefab
+  uploadId: 479994

@@ -82,3 +82,11 @@ sysinfo.txt
 .DS_Store
 Thumbs.db
 desktop.ini
+Assets/Amazing Assets/
+Resize Pro Backup/
+
+# ==========================================
+# Temporary / Archived unused assets
+# ==========================================
+/[Aa]ssets/_UnusedAssets/
+/[Aa]ssets/_UnusedAssets.meta

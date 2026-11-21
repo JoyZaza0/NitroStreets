@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4498c662fa870fa40bd2206a7e080a11
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 328634
+  packageName: Complete Racing Game URP (All in One)
+  packageVersion: 6.5
+  assetPath: Assets/Racing_Game/Effects/Lens Flare/Lens Flare/Prefabs/Point/Point_Light_Flare_6.asset
+  uploadId: 968340

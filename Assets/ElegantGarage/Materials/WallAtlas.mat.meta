@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cf942c43b2e73234a99b04a8de9fcd0f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 212239
+  packageName: Elegant Racing Garage - Mobile Ready
+  packageVersion: 1.0
+  assetPath: Assets/ElegantGarage/Materials/WallAtlas.mat
+  uploadId: 479994

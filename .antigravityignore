@@ -1,0 +1,99 @@
+# Antigravity Workspace Ignore Filter for Unity Projects
+# Reference: ignores non-code assets, metadata noise, and cache folders to maximize indexing speed and token efficiency.
+
+# ==========================================
+# Unity Metadata Noise
+# ==========================================
+*.meta
+
+# ==========================================
+# Unity Engine Caches and Temp Folders
+# ==========================================
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+.utmp/
+bin/
+.gradle/
+*_BurstDebugInformation_DoNotShip/
+
+# ==========================================
+# IDE and Environment Caches
+# ==========================================
+.vs/
+.idea/
+.vscode/
+ExportedObj/
+*.csproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.pdb
+*.mdb
+
+# ==========================================
+# Binary Media & 3D Assets (non-text)
+# ==========================================
+*.fbx
+*.obj
+*.blend
+*.max
+*.dae
+*.3ds
+
+# Textures & Images
+*.png
+*.tga
+*.psd
+*.bmp
+*.jpg
+*.jpeg
+*.exr
+*.tif
+*.tiff
+*.hdr
+*.cubemap
+
+# Audio & Video
+*.wav
+*.mp3
+*.ogg
+*.flac
+*.aif
+*.mp4
+*.mov
+*.avi
+
+# Fonts
+*.ttf
+*.otf
+*.fnt
+
+# Binaries, Libraries & Archives
+*.dll
+*.so
+*.dylib
+*.aar
+*.jar
+*.a
+*.zip
+*.tar.gz
+*.tgz
+*.7z
+*.unitypackage
+*.apk
+*.aab
+
+# Large report dumps
+sysinfo.txt
+Assets/UnusedAssetsReport.txt
+Assets/_UnusedAssets/
