@@ -39,11 +39,24 @@ namespace ALIyerEdon
         public int bronzeAward = 2000;
         public int silverAward = 1000;
 
+        [Header("Progression / Experience")]
+        [Tooltip("Опыт за 1-е место")]
+        public int goldExperience = 50;
+        [Tooltip("Опыт за 2-е место")]
+        public int secondPlaceExperience = 30;
+        [Tooltip("Опыт за 3-е место")]
+        public int thirdPlaceExperience = 20;
+        [Tooltip("Утешительный опыт за завершение гонки (4-е место и ниже)")]
+        public int participationExperience = 10;
+        [Tooltip("Опциональный текст для отображения полученного опыта на экране финиша")]
+        public UnityEngine.UI.Text earnedExperienceText;
+
         [Header("AdMob (Удвоение награды за рекламу)")]
         [Tooltip("Опциональная кнопка 'x2 Награда за рекламу' на экране финиша")]
         public GameObject doubleRewardButton;
 
         [HideInInspector] public int LastEarnedAward { get; private set; }
+        [HideInInspector] public int LastEarnedExperience { get; private set; }
         private bool rewardDoubled;
 
         // Update player's position
@@ -97,6 +110,7 @@ namespace ALIyerEdon
         {
             rewardDoubled = false;
             LastEarnedAward = 0;
+            LastEarnedExperience = 0;
 
             //  Save current level award to display in the main menu (garage scene)
             if (PlayerPrefs.GetInt("Award_Level_" + level_ID.ToString()) > position)
@@ -110,48 +124,62 @@ namespace ALIyerEdon
                 silverIcon.SetActive(false);
                 noAward.SetActive(false);
                 LastEarnedAward = goldAward;
+                LastEarnedExperience = goldExperience;
                 PlayerPrefs.SetInt("TotalScores", PlayerPrefs.GetInt("TotalScores") + goldAward);
             }
-            if (position == 1)
+            else if (position == 1)
             {
                 goldIcon.SetActive(false);
                 bronzeIcon.SetActive(true);
                 silverIcon.SetActive(false);
                 noAward.SetActive(false);
                 LastEarnedAward = bronzeAward;
+                LastEarnedExperience = secondPlaceExperience;
                 PlayerPrefs.SetInt("TotalScores", PlayerPrefs.GetInt("TotalScores") + bronzeAward);
             }
-            if (position == 2)
+            else if (position == 2)
             {
                 goldIcon.SetActive(false);
                 bronzeIcon.SetActive(false);
                 silverIcon.SetActive(true);
                 noAward.SetActive(false);
                 LastEarnedAward = silverAward;
+                LastEarnedExperience = thirdPlaceExperience;
                 PlayerPrefs.SetInt("TotalScores", PlayerPrefs.GetInt("TotalScores") + silverAward);
             }
-            if (position == 3)
+            else
             {
                 goldIcon.SetActive(false);
                 bronzeIcon.SetActive(false);
                 silverIcon.SetActive(false);
                 noAward.SetActive(true);
                 LastEarnedAward = 0;
+                LastEarnedExperience = participationExperience;
+            }
+
+            // Начисляем опыт в систему прогрессии игрока
+            if (LastEarnedExperience > 0)
+            {
+                PlayerProgression.AddExperience(LastEarnedExperience);
+                if (earnedExperienceText != null)
+                {
+                    earnedExperienceText.text = $"+{LastEarnedExperience} XP";
+                }
             }
 
             if (doubleRewardButton != null)
             {
-                doubleRewardButton.SetActive(LastEarnedAward > 0);
+                doubleRewardButton.SetActive(LastEarnedAward > 0 || LastEarnedExperience > 0);
             }
         }
 
         /// <summary>
         /// Метод для привязки к UI-кнопке 'x2 Награда' на экране финиша.
-        /// Показывает вознаграждаемую рекламу AdMob и удваивает полученные за гонку монеты.
+        /// Показывает вознаграждаемую рекламу AdMob и удваивает полученные за гонку монеты и опыт.
         /// </summary>
         public void WatchAdToDoubleReward()
         {
-            if (rewardDoubled || LastEarnedAward <= 0)
+            if (rewardDoubled || (LastEarnedAward <= 0 && LastEarnedExperience <= 0))
                 return;
 
             if (NitroStreets.Ads.AdMobManager.Instance != null)
@@ -162,20 +190,35 @@ namespace ALIyerEdon
 
         public void GrantDoubleRewardImmediate()
         {
-            if (rewardDoubled || LastEarnedAward <= 0)
+            if (rewardDoubled || (LastEarnedAward <= 0 && LastEarnedExperience <= 0))
                 return;
 
             rewardDoubled = true;
-            if (NitroStreets.Ads.AdMobManager.Instance != null)
+
+            // Удваиваем монеты
+            if (LastEarnedAward > 0)
             {
-                NitroStreets.Ads.AdMobManager.Instance.AddCoinsAndRefreshUI(LastEarnedAward);
+                if (NitroStreets.Ads.AdMobManager.Instance != null)
+                {
+                    NitroStreets.Ads.AdMobManager.Instance.AddCoinsAndRefreshUI(LastEarnedAward);
+                }
+                else
+                {
+                    int newTotal = PlayerPrefs.GetInt("TotalScores") + LastEarnedAward;
+                    PlayerPrefs.SetInt("TotalScores", newTotal);
+                    if (totalScores != null)
+                        totalScores.text = "Total Coins : " + newTotal.ToString();
+                }
             }
-            else
+
+            // Удваиваем полученный опыт
+            if (LastEarnedExperience > 0)
             {
-                int newTotal = PlayerPrefs.GetInt("TotalScores") + LastEarnedAward;
-                PlayerPrefs.SetInt("TotalScores", newTotal);
-                if (totalScores != null)
-                    totalScores.text = "Total Coins : " + newTotal.ToString();
+                PlayerProgression.AddExperience(LastEarnedExperience);
+                if (earnedExperienceText != null)
+                {
+                    earnedExperienceText.text = $"+{LastEarnedExperience * 2} XP";
+                }
             }
 
             if (doubleRewardButton != null)
