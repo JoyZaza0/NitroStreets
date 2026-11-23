@@ -174,7 +174,33 @@ public sealed class PlayerProgressionDisplay : MonoBehaviour
     {
         Transform existingBar = profileTransform.Find("ProgressionBar");
         if (existingBar != null)
+        {
+            Slider existingSlider = existingBar.GetComponentInChildren<Slider>(true);
+            Text existingLevel = existingBar.Find("LevelBadge")?.GetComponent<Text>();
+            Text existingXp = existingBar.Find("ExperienceText")?.GetComponent<Text>();
+
+            for (int i = 0; i < activeEntries.Count; i++)
+            {
+                if (activeEntries[i] != null &&
+                    (activeEntries[i].experienceSlider == existingSlider ||
+                     activeEntries[i].levelText == existingLevel ||
+                     activeEntries[i].experienceText == existingXp))
+                {
+                    return;
+                }
+            }
+
+            if (existingSlider != null || existingLevel != null || existingXp != null)
+            {
+                activeEntries.Add(new ProgressionUIEntry
+                {
+                    experienceSlider = existingSlider,
+                    levelText = existingLevel,
+                    experienceText = existingXp
+                });
+            }
             return;
+        }
 
         // Ищем Player_Name_Text внутри этого Player_Profile
         Text nameText = null;

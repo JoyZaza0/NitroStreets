@@ -44,6 +44,14 @@ namespace NitroStreets.Fuel
             },
             new ModeFuelConfig
             {
+                mode = GameMode.Formula1,
+                enabled = true,
+                maxFuel = 10,
+                restoreIntervalSeconds = 600,
+                adRewardAmount = 1
+            },
+            new ModeFuelConfig
+            {
                 mode = GameMode.Offroad,
                 enabled = true,
                 maxFuel = 10,

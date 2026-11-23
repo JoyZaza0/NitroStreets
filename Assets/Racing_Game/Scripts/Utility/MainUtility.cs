@@ -154,8 +154,44 @@ namespace ALIyerEdon
 			if (totalCoinsText)
 				totalCoinsText.text = PlayerPrefs.GetInt("TotalScores").ToString();
 
-			// Instantiate the last car at start
-			Instantiate(carSelect.cars[PlayerPrefs.GetInt("CarID")], carSelect.spawnPoint.position, carSelect.spawnPoint.rotation);
+			// Instantiate the last car at start so the 3D garage is never empty
+			SpawnInitialGarageCar();
+		}
+
+		private void SpawnInitialGarageCar()
+		{
+			CarSelect targetCarSelect = ResolveInitialCarSelect();
+			if (targetCarSelect == null || targetCarSelect.cars == null || targetCarSelect.cars.Length == 0 || targetCarSelect.spawnPoint == null)
+				return;
+
+			targetCarSelect.EnsureModeCarStorageInitialized();
+			string selectedCarKey = GameModeSaveKeys.GetSelectedCarIdKey(targetCarSelect.gameMode);
+			int savedCarId = Mathf.Clamp(PlayerPrefs.GetInt(selectedCarKey, PlayerPrefs.GetInt("CarID", 0)), 0, targetCarSelect.cars.Length - 1);
+
+			if (targetCarSelect.cars[savedCarId] != null)
+			{
+				CarSelect.DestroyExistingPlayerCars();
+				Instantiate(targetCarSelect.cars[savedCarId], targetCarSelect.spawnPoint.position, targetCarSelect.spawnPoint.rotation);
+			}
+		}
+
+		private CarSelect ResolveInitialCarSelect()
+		{
+			GameMode activeMode = GameModeSaveKeys.GetActiveMode();
+			CarSelect[] allCarSelects = FindObjectsByType<CarSelect>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+			if (allCarSelects != null)
+			{
+				for (int i = 0; i < allCarSelects.Length; i++)
+				{
+					if (allCarSelects[i] != null && allCarSelects[i].gameMode == activeMode &&
+						allCarSelects[i].cars != null && allCarSelects[i].cars.Length > 0)
+					{
+						return allCarSelects[i];
+					}
+				}
+			}
+
+			return carSelect;
 		}
 
 		[ContextMenu("Clear Suspensions Save Keys")]
@@ -225,17 +261,20 @@ namespace ALIyerEdon
 
 		public void SetTrue(GameObject target)
 		{
-			target.SetActive(true);
+			if (target != null)
+				target.SetActive(true);
 		}
 
 		public void SetFalse(GameObject target)
 		{
-			target.SetActive(false);
+			if (target != null)
+				target.SetActive(false);
 		}
 
 		public void ToggleObject(GameObject target)
 		{
-			target.SetActive(!target.activeSelf);
+			if (target != null)
+				target.SetActive(!target.activeSelf);
 		}
 
 		public void LoadLevel(string name)

@@ -301,7 +301,13 @@ namespace NitroStreets.EditorTools
             string[] menuPaths = new string[]
             {
                 "Car_Select/Top",
+                "Formula1_Car_Select/Top",
                 "Career_Select_Level/Levels_Panel/Top",
+                "Formula1_Select_Level/Levels_Panel/Top",
+                "Career_Mode/Car_Select/Top",
+                "Career_Mode/Career_Select_Level/Levels_Panel/Top",
+                "Formula1_Mode/Formula1_Car_Select/Top",
+                "Formula1_Mode/Formula1_Select_Level/Levels_Panel/Top",
                 "Offroad_Select_Level/Levels_Panel/Top",
                 "Mode_Select/Top",
                 "Main_Menu/Top"

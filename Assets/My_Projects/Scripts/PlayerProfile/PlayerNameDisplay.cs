@@ -39,10 +39,27 @@ public class PlayerNameDisplay : MonoBehaviour
             start_Cutscene.detailInfo.text = $"Driver Name: {PlayerProfileStore.PlayerName}";
 
         if (playerNamesFromGarage != null && playerNamesFromGarage.Length > 0)
-
+        {
             for (int i = 0; i < playerNamesFromGarage.Length; i++)
             {
-                playerNamesFromGarage[i].text = PlayerProfileStore.PlayerName;
+                if (playerNamesFromGarage[i] != null)
+                {
+                    playerNamesFromGarage[i].text = PlayerProfileStore.PlayerName;
+                }
             }
+        }
+
+        Canvas canvas = GetComponentInParent<Canvas>();
+        if (canvas != null)
+        {
+            Text[] allTexts = canvas.GetComponentsInChildren<Text>(true);
+            for (int i = 0; i < allTexts.Length; i++)
+            {
+                if (allTexts[i] != null && allTexts[i].name == "Player_Name_Text")
+                {
+                    allTexts[i].text = PlayerProfileStore.PlayerName;
+                }
+            }
+        }
     }
 }

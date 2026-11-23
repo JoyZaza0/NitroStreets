@@ -180,6 +180,9 @@ public sealed class GarageCustomizationManager : MonoBehaviour
         }
 
         var expectedPrefab = carSelect.cars[selectionIndex];
+        if (player.name != expectedPrefab.name + "(Clone)")
+            return;
+
         var identity = FindIdentity(expectedPrefab);
         if (identity == null || string.IsNullOrWhiteSpace(identity.stableId))
         {
@@ -195,7 +198,7 @@ public sealed class GarageCustomizationManager : MonoBehaviour
             return;
         }
 
-        if (player.name != expectedPrefab.name + "(Clone)" || liveCarId.carID != expectedCarId.carID)
+        if (liveCarId.carID != expectedCarId.carID)
             return;
 
         if (player == currentPlayer && selectionIndex == currentCarSelectIndex)
@@ -1286,7 +1289,7 @@ public sealed class GarageCustomizationManager : MonoBehaviour
     public void ConfigureGarageShopScene()
     {
         var carSelects = Resources.FindObjectsOfTypeAll<CarSelect>()
-            .Where(component => component != null && component.gameObject.scene.IsValid())
+            .Where(component => component != null && component.gameObject.scene.IsValid() && component.allowCustomization)
             .ToArray();
         var suspensionComponents = Resources.FindObjectsOfTypeAll<Car_Suspension>()
             .Where(component => component != null && component.gameObject.scene.IsValid())

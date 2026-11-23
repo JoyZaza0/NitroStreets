@@ -1,127 +1,287 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Serialization;
 using ALIyerEdon;
-using System.Linq;
 
 public enum GameMode
 {
-    Career,
-    Offroad
+    Career = 0,
+    Formula1 = 1,
+    Offroad = 2
 }
+
+public static class GameModeSaveKeys
+{
+    public const string ActiveModeKey = "ActiveGameMode";
+
+    public static GameMode GetActiveMode()
+    {
+        int raw = PlayerPrefs.GetInt(ActiveModeKey, (int)GameMode.Career);
+        if (Enum.IsDefined(typeof(GameMode), raw))
+            return (GameMode)raw;
+        return GameMode.Career;
+    }
+
+    public static void SetActiveMode(GameMode mode)
+    {
+        PlayerPrefs.SetInt(ActiveModeKey, (int)mode);
+        if (NitroStreets.Fuel.ModeFuelManager.Instance != null)
+        {
+            NitroStreets.Fuel.ModeFuelManager.Instance.ActiveMode = mode;
+        }
+    }
+
+    public static string GetPrefix(GameMode mode)
+    {
+        return mode == GameMode.Career ? string.Empty : $"{mode}_";
+    }
+
+    public static string GetLevelUnlockKey(GameMode mode, int levelIndex)
+    {
+        return $"{GetPrefix(mode)}Level{levelIndex}";
+    }
+
+    public static string GetLevelAwardKey(GameMode mode, int levelIndex)
+    {
+        return $"{GetPrefix(mode)}Award_Level_{levelIndex}";
+    }
+
+    public static string GetSelectedLevelIdKey(GameMode mode)
+    {
+        return $"{GetPrefix(mode)}LevelID";
+    }
+
+    public static string GetCarUnlockKey(GameMode mode, int carIndex)
+    {
+        return $"{GetPrefix(mode)}Car{carIndex}";
+    }
+
+    public static string GetSelectedCarIdKey(GameMode mode)
+    {
+        return $"{GetPrefix(mode)}CarID";
+    }
+}
+
+[Serializable]
+public class ModeEntry
+{
+    public GameMode mode;
+    public ModeButton modeButton;
+    public LevelSelect levelSelect;
+}
+
 public class ModeSelect : MonoBehaviour
 {
     public GameMode SelectedMode;
 
     [SerializeField] private LevelSelect careerLevelSelect;
-    [SerializeField] private LevelSelect offroadLevelSelect;
+    [FormerlySerializedAs("offroadLevelSelect")]
+    [SerializeField] private LevelSelect formula1LevelSelect;
     [SerializeField] private ModeButton careerModeButton;
-    [SerializeField] private ModeButton offroadModeButton;
+    [FormerlySerializedAs("offroadModeButton")]
+    [SerializeField] private ModeButton formula1ModeButton;
+
+    [Header("Дополнительные режимы (для масштабирования)")]
+    [SerializeField] private List<ModeEntry> additionalModes = new List<ModeEntry>();
+
     [SerializeField] private Color selectedColor = Color.green;
     [SerializeField] private Color unselectedColor = Color.white;
     [SerializeField] private Text TotalScores;
     [SerializeField] private AudioSource buttonClickSound;
 
+    private bool listenersAssigned;
+
     private void Start()
     {
+        AssignListenersIfNeeded();
+        RefreshModeSelectUI();
+    }
+
+    private void OnEnable()
+    {
+        AssignListenersIfNeeded();
+        RefreshModeSelectUI();
+    }
+
+    private void AssignListenersIfNeeded()
+    {
+        if (listenersAssigned)
+            return;
+
+        if (careerModeButton != null)
+            careerModeButton.AssignButtonClickListener(SelectCareerMode);
+
+        if (formula1ModeButton != null)
+            formula1ModeButton.AssignButtonClickListener(SelectFormula1Mode);
+
+        if (additionalModes != null)
+        {
+            for (int i = 0; i < additionalModes.Count; i++)
+            {
+                ModeEntry entry = additionalModes[i];
+                if (entry != null && entry.modeButton != null)
+                {
+                    GameMode targetMode = entry.mode;
+                    entry.modeButton.AssignButtonClickListener(() => SelectMode(targetMode));
+                }
+            }
+        }
+
+        listenersAssigned = true;
+    }
+
+    private void RefreshModeSelectUI()
+    {
         UpdateModeButtons();
-
-        careerModeButton.AssignButtonClickListener(SelectCareerMode);
-        offroadModeButton.AssignButtonClickListener(SelectOffroadMode);
-
-        TotalScores.text = PlayerPrefs.GetInt("TotalScores").ToString();
-
+        if (TotalScores != null)
+            TotalScores.text = PlayerPrefs.GetInt("TotalScores").ToString();
     }
 
     public void SelectCareerMode()
     {
-        SelectedMode = GameMode.Career;
-        NitroStreets.Fuel.ModeFuelManager.EnsureInstance().ActiveMode = GameMode.Career;
-        UpdateModeButtons();
+        SelectMode(GameMode.Career);
+    }
 
-        if (offroadLevelSelect == null || careerLevelSelect == null)
-        {
-            Debug.LogError("Level select panels are not assigned.");
-            return;
-        }
-
-        careerLevelSelect.gameMode = GameMode.Career;
-        careerLevelSelect.gameObject.SetActive(true);
-        offroadLevelSelect.gameObject.SetActive(false);
-
-        buttonClickSound.Play();
-        gameObject.SetActive(false);
+    public void SelectFormula1Mode()
+    {
+        SelectMode(GameMode.Formula1);
     }
 
     public void SelectOffroadMode()
     {
-        SelectedMode = GameMode.Offroad;
-        NitroStreets.Fuel.ModeFuelManager.EnsureInstance().ActiveMode = GameMode.Offroad;
+        SelectMode(GameMode.Formula1);
+    }
+
+    public void SelectMode(GameMode mode)
+    {
+        SelectedMode = mode;
+        GameModeSaveKeys.SetActiveMode(mode);
+        NitroStreets.Fuel.ModeFuelManager.EnsureInstance().ActiveMode = mode;
         UpdateModeButtons();
 
-        if (offroadLevelSelect == null || careerLevelSelect == null)
+        LevelSelect targetLevelSelect = GetLevelSelectForMode(mode);
+        if (targetLevelSelect == null)
         {
-            Debug.LogError("Level select panels are not assigned.");
+            Debug.LogError($"Level select panel for mode {mode} is not assigned.", this);
             return;
         }
 
-        offroadLevelSelect.gameMode = GameMode.Offroad;
-        careerLevelSelect.gameObject.SetActive(false);
-        offroadLevelSelect.gameObject.SetActive(true);
-        buttonClickSound.Play();
+        SetAllLevelSelectsInactiveExcept(targetLevelSelect);
+        targetLevelSelect.gameMode = mode;
+        targetLevelSelect.gameObject.SetActive(true);
+
+        if (buttonClickSound != null)
+            buttonClickSound.Play();
+
         gameObject.SetActive(false);
+    }
+
+    private LevelSelect GetLevelSelectForMode(GameMode mode)
+    {
+        if (mode == GameMode.Career)
+            return careerLevelSelect;
+        if (mode == GameMode.Formula1)
+            return formula1LevelSelect;
+
+        if (additionalModes != null)
+        {
+            for (int i = 0; i < additionalModes.Count; i++)
+            {
+                if (additionalModes[i] != null && additionalModes[i].mode == mode)
+                    return additionalModes[i].levelSelect;
+            }
+        }
+
+        return null;
+    }
+
+    private void SetAllLevelSelectsInactiveExcept(LevelSelect activePanel)
+    {
+        if (careerLevelSelect != null && careerLevelSelect != activePanel)
+            careerLevelSelect.gameObject.SetActive(false);
+
+        if (formula1LevelSelect != null && formula1LevelSelect != activePanel)
+            formula1LevelSelect.gameObject.SetActive(false);
+
+        if (additionalModes != null)
+        {
+            for (int i = 0; i < additionalModes.Count; i++)
+            {
+                LevelSelect ls = additionalModes[i]?.levelSelect;
+                if (ls != null && ls != activePanel)
+                    ls.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void UpdateModeButtons()
     {
-        if (careerModeButton.isLocked)
+        UpdateSingleModeButton(GameMode.Career, careerModeButton, careerLevelSelect);
+        UpdateSingleModeButton(GameMode.Formula1, formula1ModeButton, formula1LevelSelect);
+
+        if (additionalModes != null)
         {
-            careerModeButton.button.interactable = false;
-            careerModeButton.lockedIcon.SetActive(true);
-            careerModeButton.lockedPanel.SetActive(true);
-            //careerModeButton.progressPanel.SetActive(false);
+            for (int i = 0; i < additionalModes.Count; i++)
+            {
+                ModeEntry entry = additionalModes[i];
+                if (entry != null)
+                {
+                    UpdateSingleModeButton(entry.mode, entry.modeButton, entry.levelSelect);
+                }
+            }
         }
-        else
-        {
-            careerModeButton.button.interactable = true;
-            careerModeButton.lockedIcon.SetActive(false);
-            careerModeButton.lockedPanel.SetActive(false);
-            // careerModeButton.progressPanel.SetActive(true);
-        }
-
-        if (offroadModeButton.isLocked)
-        {
-            offroadModeButton.button.interactable = false;
-            offroadModeButton.lockedIcon.SetActive(true);
-            offroadModeButton.lockedPanel.SetActive(true);
-            //offroadModeButton.progressPanel.SetActive(false);
-        }
-        else
-        {
-            offroadModeButton.button.interactable = true;
-            offroadModeButton.lockedIcon.SetActive(false);
-            offroadModeButton.lockedPanel.SetActive(false);
-            //offroadModeButton.progressPanel.SetActive(true);
-        }
-
-
-        careerModeButton.SetSelected(SelectedMode == GameMode.Career, selectedColor, unselectedColor);
-        offroadModeButton.SetSelected(SelectedMode == GameMode.Offroad, selectedColor, unselectedColor);
-
-
-        var cuurentCareerLevelIndex = FindLastLevelIndex();
-        var careerProgress = (cuurentCareerLevelIndex + 1) * 100 / careerLevelSelect.levelPrices.Length;
-
-
-
-        careerModeButton.UpdateProgressText("Level: " + (cuurentCareerLevelIndex + 1).ToString() + "/" + careerLevelSelect.levelPrices.Length.ToString());
-        offroadModeButton.UpdateProgressText("Comming Soon");
     }
-    private int FindLastLevelIndex()
+
+    private void UpdateSingleModeButton(GameMode mode, ModeButton modeButton, LevelSelect levelSelect)
     {
-        var lastLevelIndex = -1;
-        for (int i = 0; i < careerLevelSelect.levelPrices.Length; i++)
+        if (modeButton == null)
+            return;
+
+        modeButton.mode = mode;
+        if (levelSelect != null)
+            modeButton.levelSelectPanel = levelSelect.gameObject;
+
+        if (modeButton.isLocked)
         {
-            if (PlayerPrefs.GetInt("Level" + i, 0) == 3)
+            if (modeButton.button != null)
+                modeButton.button.interactable = false;
+            if (modeButton.lockedIcon != null)
+                modeButton.lockedIcon.SetActive(true);
+            if (modeButton.lockedPanel != null)
+                modeButton.lockedPanel.SetActive(true);
+
+            modeButton.SetSelected(SelectedMode == mode, selectedColor, unselectedColor);
+            modeButton.UpdateProgressText("Coming Soon");
+            return;
+        }
+
+        if (modeButton.button != null)
+            modeButton.button.interactable = true;
+        if (modeButton.lockedIcon != null)
+            modeButton.lockedIcon.SetActive(false);
+        if (modeButton.lockedPanel != null)
+            modeButton.lockedPanel.SetActive(false);
+
+        modeButton.SetSelected(SelectedMode == mode, selectedColor, unselectedColor);
+
+        if (levelSelect != null && levelSelect.levelPrices != null && levelSelect.levelPrices.Length > 0)
+        {
+            levelSelect.gameMode = mode;
+            levelSelect.EnsureModeStorageInitialized();
+            int lastUnlockedIndex = FindLastUnlockedLevelIndex(mode, levelSelect.levelPrices.Length);
+            int totalLevels = levelSelect.levelPrices.Length;
+            modeButton.UpdateProgressText($"Level: {lastUnlockedIndex + 1}/{totalLevels}");
+        }
+    }
+
+    private int FindLastUnlockedLevelIndex(GameMode mode, int totalLevels)
+    {
+        int lastLevelIndex = 0;
+        for (int i = 0; i < totalLevels; i++)
+        {
+            if (PlayerPrefs.GetInt(GameModeSaveKeys.GetLevelUnlockKey(mode, i), 0) == 3)
             {
                 lastLevelIndex = i;
             }
@@ -129,18 +289,4 @@ public class ModeSelect : MonoBehaviour
 
         return lastLevelIndex;
     }
-    private void ShowLevelSelectPanel()
-    {
-        if (SelectedMode == GameMode.Career)
-        {
-            careerLevelSelect.gameObject.SetActive(true);
-        }
-        else if (SelectedMode == GameMode.Offroad)
-        {
-            offroadLevelSelect.gameObject.SetActive(true);
-        }
-    }
-
-
 }
-

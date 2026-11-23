@@ -112,9 +112,11 @@ namespace ALIyerEdon
             LastEarnedAward = 0;
             LastEarnedExperience = 0;
 
-            //  Save current level award to display in the main menu (garage scene)
-            if (PlayerPrefs.GetInt("Award_Level_" + level_ID.ToString()) > position)
-                PlayerPrefs.SetInt("Award_Level_" + level_ID.ToString(), position);
+            // Save current level award for the active GameMode to display in the main menu (garage scene)
+            GameMode activeMode = GameModeSaveKeys.GetActiveMode();
+            string awardKey = GameModeSaveKeys.GetLevelAwardKey(activeMode, level_ID);
+            if (PlayerPrefs.GetInt(awardKey, 3) > position)
+                PlayerPrefs.SetInt(awardKey, position);
 
             // Enable disable award icons (gold, bronze, silver)
             if (position == 0)

@@ -22,9 +22,33 @@ public sealed class GarageCarStatsDisplay : MonoBehaviour
     [SerializeField] private Slider handlingSlider;
     private int displayedCarIndex = -1;
 
+    private void Awake()
+    {
+        CarSelect parentCarSelect = GetComponentInParent<CarSelect>(true);
+        if (parentCarSelect != null)
+            carSelect = parentCarSelect;
+    }
+
+    private void OnEnable()
+    {
+        CarSelect parentCarSelect = GetComponentInParent<CarSelect>(true);
+        if (parentCarSelect != null)
+            carSelect = parentCarSelect;
+
+        displayedCarIndex = -1;
+        if (carSelect != null && speedValue != null && enginePowerValue != null && handlingValue != null &&
+            speedSlider != null && enginePowerSlider != null && handlingSlider != null)
+        {
+            RefreshStats();
+        }
+    }
+
     private void Start()
     {
-        if (carSelect == null)
+        CarSelect parentCarSelect = GetComponentInParent<CarSelect>(true);
+        if (parentCarSelect != null)
+            carSelect = parentCarSelect;
+        else if (carSelect == null)
             carSelect = FindAnyObjectByType<CarSelect>();
 
         if (carSelect == null)

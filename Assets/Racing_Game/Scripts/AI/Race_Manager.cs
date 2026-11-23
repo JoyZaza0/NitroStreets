@@ -131,8 +131,13 @@ namespace ALIyerEdon
 
             totalRacerPrefabs = new GameObject[racerPrefabs.Length + 1];
 
-            // First racer is the player's prefab
-            totalRacerPrefabs[0] = playerPrefabs[PlayerPrefs.GetInt("CarID")];
+            // First racer is the player's prefab (resolved for the active GameMode)
+            GameMode activeMode = GameModeSaveKeys.GetActiveMode();
+            int selectedCarIndex = PlayerPrefs.GetInt(
+                GameModeSaveKeys.GetSelectedCarIdKey(activeMode),
+                PlayerPrefs.GetInt("CarID", 0));
+            selectedCarIndex = Mathf.Clamp(selectedCarIndex, 0, Mathf.Max(0, playerPrefabs.Length - 1));
+            totalRacerPrefabs[0] = playerPrefabs[selectedCarIndex];
 
             // Add racer prefabs to the total racer array
             for (int ttt = 1; ttt < totalRacerPrefabs.Length; ttt++)

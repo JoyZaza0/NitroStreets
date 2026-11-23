@@ -29,20 +29,21 @@ public class LevelUnlocker : MonoBehaviour
 
             if(startFinishUI != null)
             {
+                string targetUnlockKey = ResolveUnlockKey(unlockLevelId);
                 if(startFinishUI.goldIcon.activeSelf)
                 {
-                    PlayerPrefs.SetInt(levelKey + unlockLevelId.ToString() , 3);
-                    Debug.Log("Level " + unlockLevelId + " unlocked with Gold!");
+                    PlayerPrefs.SetInt(targetUnlockKey, 3);
+                    Debug.Log($"[{targetUnlockKey}] unlocked with Gold!");
                 }
                 else if(startFinishUI.silverIcon.activeSelf)
                 {
-                    PlayerPrefs.SetInt(levelKey + unlockLevelId.ToString() , 3);
-                    Debug.Log("Level " + unlockLevelId + " unlocked with Silver!");
+                    PlayerPrefs.SetInt(targetUnlockKey, 3);
+                    Debug.Log($"[{targetUnlockKey}] unlocked with Silver!");
                 }
                 else if(startFinishUI.bronzeIcon.activeSelf)
                 {
-                    PlayerPrefs.SetInt(levelKey + unlockLevelId.ToString() , 3);
-                    Debug.Log("Level " + unlockLevelId + " unlocked with Bronze!");
+                    PlayerPrefs.SetInt(targetUnlockKey, 3);
+                    Debug.Log($"[{targetUnlockKey}] unlocked with Bronze!");
                 }
             }
             else
@@ -54,5 +55,15 @@ public class LevelUnlocker : MonoBehaviour
         {
             Debug.LogWarning("Race_Manager reference is missing.");
         }
+    }
+
+    private string ResolveUnlockKey(int targetLevelId)
+    {
+        if (string.IsNullOrEmpty(levelKey) || levelKey == "Level")
+        {
+            return GameModeSaveKeys.GetLevelUnlockKey(GameModeSaveKeys.GetActiveMode(), targetLevelId);
+        }
+
+        return levelKey + targetLevelId.ToString();
     }
 }

@@ -40,133 +40,170 @@ namespace ALIyerEdon
 		// SetActive(true) loading window before start loading level
 		public GameObject Loading;
 
+		[Header("Mode & Customization Settings")]
+		public GameMode gameMode = GameMode.Career;
+		public bool allowCustomization = true;
+
+		void Awake()
+		{
+			AutoDetectMode();
+			EnsureModeCarStorageInitialized();
+		}
+
+		void OnEnable()
+		{
+			AutoDetectMode();
+			EnsureModeCarStorageInitialized();
+			RefreshSelectedCarAndSpawn();
+		}
 
 		void Start()
 		{
+			AutoDetectMode();
+			EnsureModeCarStorageInitialized();
+			RefreshSelectedCarAndSpawn();
+		}
 
-			// Read lastest car selected ID before    
-			ID = PlayerPrefs.GetInt("CarID");
-
-			// Update total scores display
-			TotalScores.text = PlayerPrefs.GetInt("TotalScores").ToString();
-
-			// Distroy all players car before instantiate the new one
-			Destroy(GameObject.FindGameObjectWithTag("Player"));
-
-			// Instantiate last selected car by saved ID
-			Instantiate(cars[ID], spawnPoint.position, spawnPoint.rotation);
-
-			StartCoroutine(ColorPanel_Check());
-
-			// Enable or disable buy , lock and car price displays
-			if (PlayerPrefs.GetInt("Car" + ID.ToString()) == 3)
+		private void AutoDetectMode()
+		{
+			if (levelSelect != null)
 			{
-				lockIcon.SetActive(false);
-				buyButton.SetActive(false);
-				Price.SetActive(false);
+				gameMode = levelSelect.gameMode;
+				return;
+			}
+
+			if (gameObject.name.IndexOf("Formula", System.StringComparison.OrdinalIgnoreCase) >= 0 ||
+				gameObject.name.IndexOf("F1", System.StringComparison.OrdinalIgnoreCase) >= 0)
+			{
+				gameMode = GameMode.Formula1;
+				allowCustomization = false;
+			}
+			else if (gameObject.name.IndexOf("Offroad", System.StringComparison.OrdinalIgnoreCase) >= 0)
+			{
+				gameMode = GameMode.Offroad;
 			}
 			else
 			{
-				lockIcon.SetActive(true);
-				buyButton.SetActive(true);
-				Price.SetActive(true);
-			}
-
-			// Update current car value text
-			carPriceText.text = carPrices[ID].ToString() + " $";
-
-			// Update current car is locked or not
-			if (PlayerPrefs.GetInt("Car" + ID.ToString()) == 3)
-			{
-				lockIcon.SetActive(false);
-				buyButton.SetActive(false);
-			}
-			else
-			{
-				lockIcon.SetActive(true);
-				buyButton.SetActive(true);
+				gameMode = GameMode.Career;
 			}
 		}
 
+		public void EnsureModeCarStorageInitialized()
+		{
+			string firstCarKey = GameModeSaveKeys.GetCarUnlockKey(gameMode, 0);
+			if (PlayerPrefs.GetInt(firstCarKey, 0) != 3)
+			{
+				PlayerPrefs.SetInt(firstCarKey, 3);
+				PlayerPrefs.Save();
+			}
+		}
+
+		public void RefreshSelectedCarAndSpawn()
+		{
+			if (cars == null || cars.Length == 0)
+			{
+				Debug.LogWarning($"[CarSelect] Car array on {gameObject.name} is empty.", this);
+				return;
+			}
+
+			string selectedCarKey = GameModeSaveKeys.GetSelectedCarIdKey(gameMode);
+			ID = Mathf.Clamp(PlayerPrefs.GetInt(selectedCarKey, 0), 0, cars.Length - 1);
+			PlayerPrefs.SetInt(selectedCarKey, ID);
+
+			if (TotalScores != null)
+				TotalScores.text = PlayerPrefs.GetInt("TotalScores").ToString();
+
+			SpawnCurrentCar();
+			UpdateCarLockAndPriceUI();
+
+			if (gameObject.activeInHierarchy)
+				StartCoroutine(ColorPanel_Check());
+		}
+
+		private void SpawnCurrentCar()
+		{
+			if (cars == null || ID < 0 || ID >= cars.Length || cars[ID] == null || spawnPoint == null)
+				return;
+
+			DestroyExistingPlayerCars();
+			Instantiate(cars[ID], spawnPoint.position, spawnPoint.rotation);
+		}
+
+		public static void DestroyExistingPlayerCars()
+		{
+			GameObject[] existingPlayers = GameObject.FindGameObjectsWithTag("Player");
+			if (existingPlayers == null)
+				return;
+
+			for (int i = 0; i < existingPlayers.Length; i++)
+			{
+				if (existingPlayers[i] != null)
+				{
+					existingPlayers[i].tag = "Untagged";
+					existingPlayers[i].SetActive(false);
+					Destroy(existingPlayers[i]);
+				}
+			}
+		}
+
+		private void UpdateCarLockAndPriceUI()
+		{
+			bool isUnlocked = PlayerPrefs.GetInt(GameModeSaveKeys.GetCarUnlockKey(gameMode, ID), 0) == 3;
+
+			if (lockIcon != null)
+				lockIcon.SetActive(!isUnlocked);
+			if (buyButton != null)
+				buyButton.SetActive(!isUnlocked);
+			if (Price != null)
+				Price.SetActive(!isUnlocked);
+
+			if (carPriceText != null && carPrices != null && ID >= 0 && ID < carPrices.Length)
+				carPriceText.text = carPrices[ID].ToString() + " $";
+		}
+
 		bool nextClick, prevClick;
+
 		// Public function for NextCar select button in menu
 		public void NextCar()
 		{
-			if (!prevClick)
+			if (!prevClick && cars != null && cars.Length > 0)
 			{
-
 				nextClick = true;
 
 				if (ID < cars.Length - 1)
 					ID++;
 
-				PlayerPrefs.SetInt("CarID", ID);
+				string selectedCarKey = GameModeSaveKeys.GetSelectedCarIdKey(gameMode);
+				PlayerPrefs.SetInt(selectedCarKey, ID);
 
-				// Distroy all players car before instantiate the new one
-				Destroy(GameObject.FindGameObjectWithTag("Player"));
+				SpawnCurrentCar();
+				UpdateCarLockAndPriceUI();
 
-				ID = PlayerPrefs.GetInt("CarID");
-
-				// Instantiate last selected car by saved ID
-				Instantiate(cars[ID], spawnPoint.position, spawnPoint.rotation);
-
-				if (PlayerPrefs.GetInt("Car" + ID.ToString()) == 3)
-				{
-					lockIcon.SetActive(false);
-					buyButton.SetActive(false);
-					Price.SetActive(false);
-				}
-				else
-				{
-					lockIcon.SetActive(true);
-					buyButton.SetActive(true);
-					Price.SetActive(true);
-				}
-
-				carPriceText.text = carPrices[ID].ToString() + " $";
-
-				StartCoroutine(ColorPanel_Check());
+				if (gameObject.activeInHierarchy)
+					StartCoroutine(ColorPanel_Check());
 
 				nextClick = false;
 			}
 		}
+
 		// Public function for PrevCar select button in menu
 		public void PrevCar()
 		{
-			if (!nextClick)
+			if (!nextClick && cars != null && cars.Length > 0)
 			{
-
 				prevClick = true;
 
 				if (ID > 0)
 					ID--;
 
-				PlayerPrefs.SetInt("CarID", ID);
+				string selectedCarKey = GameModeSaveKeys.GetSelectedCarIdKey(gameMode);
+				PlayerPrefs.SetInt(selectedCarKey, ID);
 
-				Destroy(GameObject.FindGameObjectWithTag("Player"));
+				SpawnCurrentCar();
+				UpdateCarLockAndPriceUI();
 
-
-				ID = PlayerPrefs.GetInt("CarID");
-
-				// Instantiate last selected car by saved ID
-				Instantiate(cars[ID], spawnPoint.position, spawnPoint.rotation);
-
-				if (PlayerPrefs.GetInt("Car" + ID.ToString()) == 3)
-				{
-					lockIcon.SetActive(false);
-					buyButton.SetActive(false);
-					Price.SetActive(false);
-				}
-				else
-				{
-					lockIcon.SetActive(true);
-					buyButton.SetActive(true);
-					Price.SetActive(true);
-				}
-
-				carPriceText.text = carPrices[ID].ToString() + " $";
-
-				StartCoroutine(ColorPanel_Check());
+				if (gameObject.activeInHierarchy)
+					StartCoroutine(ColorPanel_Check());
 
 				prevClick = false;
 			}
@@ -174,56 +211,54 @@ namespace ALIyerEdon
 
 		public void Buy_CurrentCar()
 		{
-			purchaseUI.SetActive(true);
-			noEnoughScores.SetActive(false);
+			if (purchaseUI != null)
+				purchaseUI.SetActive(true);
+			if (noEnoughScores != null)
+				noEnoughScores.SetActive(false);
 		}
 
 		// Buy current selected car
 		public void BuyCar()
 		{
-
 			// Check player have enough money
 			if (carPrices[ID] <= PlayerPrefs.GetInt("TotalScores"))
 			{
-
-				PlayerPrefs.SetInt("Car" + ID.ToString(), 3);
+				PlayerPrefs.SetInt(GameModeSaveKeys.GetCarUnlockKey(gameMode, ID), 3);
 
 				// Reduce current car price from the total scores
 				PlayerPrefs.SetInt("TotalScores",
 					PlayerPrefs.GetInt("TotalScores") - carPrices[ID]);
 
+				UpdateCarLockAndPriceUI();
 
-				// Disable lock icon for current car
-				lockIcon.SetActive(false);
-
-				// Disable Buy button for current car
-				buyButton.SetActive(false);
-
-				// Disable car price text
-				Price.SetActive(false);
-
-				purchaseUI.SetActive(false);
+				if (purchaseUI != null)
+					purchaseUI.SetActive(false);
 
 				// Update total scores display
-				TotalScores.text = PlayerPrefs.GetInt("TotalScores").ToString();
+				if (TotalScores != null)
+					TotalScores.text = PlayerPrefs.GetInt("TotalScores").ToString();
 			}
 			else
 			{
 				// Show the shop offer window
-				noEnoughScores.SetActive(true);
-				purchaseUI.SetActive(false);
+				if (noEnoughScores != null)
+					noEnoughScores.SetActive(true);
+				if (purchaseUI != null)
+					purchaseUI.SetActive(false);
 			}
 		}
 
 		// Select current car
 		public void SelectCar()
 		{
-			if (PlayerPrefs.GetInt("Car" + ID.ToString()) == 3)
+			if (PlayerPrefs.GetInt(GameModeSaveKeys.GetCarUnlockKey(gameMode, ID), 0) == 3)
 			{
+				GameMode targetMode = levelSelect != null ? levelSelect.gameMode : gameMode;
+				GameModeSaveKeys.SetActiveMode(targetMode);
+
 				if (levelSelect == null || levelSelect.useFuelSystem)
 				{
 					var fuelManager = NitroStreets.Fuel.ModeFuelManager.EnsureInstance();
-					GameMode targetMode = levelSelect != null ? levelSelect.gameMode : fuelManager.ActiveMode;
 
 					if (!fuelManager.TryConsumeFuel(targetMode, 1))
 					{
@@ -242,30 +277,74 @@ namespace ALIyerEdon
 					}
 				}
 
-				// Set current selected car ID for instantiate in main level    
+				// Set current selected car ID for instantiate in main level
+				PlayerPrefs.SetInt(GameModeSaveKeys.GetSelectedCarIdKey(targetMode), ID);
 				PlayerPrefs.SetInt("CarID", ID);
 
-				Loading.SetActive(true);
+				if (Loading != null)
+					Loading.SetActive(true);
 
-                FindFirstObjectByType<ControllerMouseSimulator>().Update_CursorIcon(false);
+				var cursorSim = FindFirstObjectByType<ControllerMouseSimulator>();
+				if (cursorSim != null)
+					cursorSim.Update_CursorIcon(false);
 
-                SceneManager.LoadSceneAsync(levelSelect.levelNames[PlayerPrefs.GetInt("LevelID")]);
+				int selectedLevelId = PlayerPrefs.GetInt(
+					GameModeSaveKeys.GetSelectedLevelIdKey(targetMode),
+					PlayerPrefs.GetInt("LevelID", 0));
+
+				if (levelSelect != null && levelSelect.levelNames != null &&
+					selectedLevelId >= 0 && selectedLevelId < levelSelect.levelNames.Length)
+				{
+					SceneManager.LoadSceneAsync(levelSelect.levelNames[selectedLevelId]);
+				}
+				else
+				{
+					Debug.LogError($"[CarSelect] Invalid level index {selectedLevelId} or unassigned levelNames on LevelSelect.", this);
+				}
 			}
 			else
-            {
-				purchaseUI.SetActive(true);
+			{
+				if (purchaseUI != null)
+					purchaseUI.SetActive(true);
+				if (noEnoughScores != null)
+					noEnoughScores.SetActive(false);
+			}
+		}
+
+		public void BackToLevelSelect()
+		{
+			if (purchaseUI != null)
+				purchaseUI.SetActive(false);
+			if (noEnoughScores != null)
 				noEnoughScores.SetActive(false);
-            }
+
+			gameObject.SetActive(false);
+
+			if (levelSelect != null)
+			{
+				levelSelect.gameObject.SetActive(true);
+				if (levelSelect.backgroundUI != null)
+					levelSelect.backgroundUI.SetActive(true);
+			}
 		}
 
 		IEnumerator ColorPanel_Check()
-        {
+		{
 			yield return new WaitForEndOfFrame();
+
+			if (colorPicker == null)
+				yield break;
+
+			if (!allowCustomization)
+			{
+				colorPicker.SetActive(false);
+				yield break;
+			}
 
 			if (FindObjectOfType<Car_Color>())
 				colorPicker.SetActive(true);
 			else
 				colorPicker.SetActive(false);
-		}		
+		}
 	}
 }
