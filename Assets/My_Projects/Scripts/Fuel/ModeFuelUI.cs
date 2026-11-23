@@ -31,14 +31,18 @@ namespace NitroStreets.Fuel
         [Header("Опциональная кнопка пополнения (+)")]
         [SerializeField] private Button openOfferButton;
 
-        [Header("Окно предложения рекламы (при клике на уровень с 0/10)")]
+        [Header("Окно предложения рекламы (при клике на уровень с 0/10 или кнопку +)")]
         [SerializeField] private GameObject noFuelOfferPopup;
         [SerializeField] private Button watchAdButton;
         [SerializeField] private Button closeOfferButton;
+        [SerializeField] private Text popupTitleText;
+        [SerializeField] private TMP_Text popupTitleTmpText;
         [SerializeField] private Text popupStatusText;
         [SerializeField] private TMP_Text popupStatusTmpText;
         [SerializeField] private Text popupTimerText;
         [SerializeField] private TMP_Text popupTimerTmpText;
+        [SerializeField] private string fullFuelPopupTitle = "FUEL IS FULL!";
+        [SerializeField] private string fullFuelPopupMessage = "YOUR FUEL IS FULL ({0}/{1})!\nYou are ready to race!";
 
         [Header("Цвета индикации")]
         [SerializeField] private Color normalFuelColor = Color.white;
@@ -174,11 +178,7 @@ namespace NitroStreets.Fuel
 
         private void OnOpenOfferButtonClicked()
         {
-            ModeFuelManager manager = ModeFuelManager.EnsureInstance();
-            if (manager != null && manager.GetCurrentFuel(targetMode) < manager.GetMaxFuel(targetMode))
-            {
-                ShowNoFuelAdOffer();
-            }
+            ShowNoFuelAdOffer();
         }
 
         private void OnWatchAdClicked()
@@ -215,6 +215,7 @@ namespace NitroStreets.Fuel
             bool needFuel = manager != null && manager.GetCurrentFuel(targetMode) < manager.GetMaxFuel(targetMode);
             bool adReady = AdMobManager.Instance == null || AdMobManager.Instance.IsRewardedAdReady();
 
+            watchAdButton.gameObject.SetActive(needFuel);
             watchAdButton.interactable = needFuel && adReady;
         }
 
@@ -246,13 +247,34 @@ namespace NitroStreets.Fuel
 
             if (openOfferButton != null)
             {
-                openOfferButton.gameObject.SetActive(!isFull);
+                if (!openOfferButton.gameObject.activeSelf)
+                    openOfferButton.gameObject.SetActive(true);
+                openOfferButton.interactable = true;
             }
 
+            string titleMsg = isFull
+                ? fullFuelPopupTitle
+                : (isEmpty ? "NO FUEL" : "ADD FUEL");
+
+            if (popupTitleText != null)
+                popupTitleText.text = titleMsg;
+            if (popupTitleTmpText != null)
+                popupTitleTmpText.text = titleMsg;
+
             int rewardAmount = manager.GetAdRewardAmount(targetMode);
-            string popupMsg = isEmpty
-                ? $"OUT OF FUEL ({current}/{max})\nWatch an ad to restore +{rewardAmount} Fuel!"
-                : $"FUEL: {current}/{max}\nWatch an ad to restore +{rewardAmount} Fuel!";
+            string popupMsg;
+            if (isFull)
+            {
+                popupMsg = string.Format(fullFuelPopupMessage, current, max);
+            }
+            else if (isEmpty)
+            {
+                popupMsg = $"OUT OF FUEL ({current}/{max})\nWatch an ad to restore +{rewardAmount} Fuel!";
+            }
+            else
+            {
+                popupMsg = $"FUEL: {current}/{max}\nWatch an ad to restore +{rewardAmount} Fuel!";
+            }
 
             if (popupStatusText != null)
                 popupStatusText.text = popupMsg;
@@ -345,6 +367,10 @@ namespace NitroStreets.Fuel
                 }
 
                 BindPopupReferences(existingPopup);
+            }
+            else if (popupTitleText == null && popupTitleTmpText == null)
+            {
+                BindPopupReferences(noFuelOfferPopup.transform);
             }
         }
 
@@ -695,6 +721,13 @@ namespace NitroStreets.Fuel
 
             Transform dialog = popupRoot.Find("Dialog_Box");
             Transform searchRoot = dialog != null ? dialog : popupRoot;
+
+            Transform titleTr = searchRoot.Find("Title_Text");
+            if (titleTr != null)
+            {
+                popupTitleText = titleTr.GetComponent<Text>();
+                popupTitleTmpText = titleTr.GetComponent<TMP_Text>();
+            }
 
             Transform statusTr = searchRoot.Find("Status_Text");
             if (statusTr != null)
