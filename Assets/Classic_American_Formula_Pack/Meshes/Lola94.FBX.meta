@@ -1,0 +1,356 @@
+fileFormatVersion: 2
+guid: 941e85c301ac3ca47ac2e2e2c975acc3
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Lola94_Collision
+    100004: Lola94_driver
+    100006: Lola94_engine
+    100008: Lola94_Enginecover
+    100010: Lola94_Enginecover_wing
+    100012: Lola94_FW_Oval
+    100014: Lola94_FW_Road
+    100016: Lola94_helmet
+    100018: Lola94_Mainbody
+    100020: Lola94_RW_oval
+    100022: Lola94_RW_Road
+    100024: Lola94_sidepod_L
+    100026: Lola94_sidepod_R
+    100028: Lola94_spind_LF
+    100030: Lola94_spind_LR
+    100032: Lola94_spind_RF
+    100034: Lola94_spind_RR
+    100036: Lola94_susp_LF
+    100038: Lola94_susp_LR
+    100040: Lola94_susp_RF
+    100042: Lola94_susp_RR
+    100044: Lola94_Tire_LF
+    100046: Lola94_Tire_LR
+    100048: Lola94_Tire_RF
+    100050: Lola94_Tire_RR
+    100052: Lola94_wheel
+    100054: Lola94_wingle2_L
+    100056: Lola94_wingle2_R
+    100058: Lola94_wingle_L
+    100060: Lola94_wingle_R
+    400000: //RootNode
+    400002: Lola94_Collision
+    400004: Lola94_driver
+    400006: Lola94_engine
+    400008: Lola94_Enginecover
+    400010: Lola94_Enginecover_wing
+    400012: Lola94_FW_Oval
+    400014: Lola94_FW_Road
+    400016: Lola94_helmet
+    400018: Lola94_Mainbody
+    400020: Lola94_RW_oval
+    400022: Lola94_RW_Road
+    400024: Lola94_sidepod_L
+    400026: Lola94_sidepod_R
+    400028: Lola94_spind_LF
+    400030: Lola94_spind_LR
+    400032: Lola94_spind_RF
+    400034: Lola94_spind_RR
+    400036: Lola94_susp_LF
+    400038: Lola94_susp_LR
+    400040: Lola94_susp_RF
+    400042: Lola94_susp_RR
+    400044: Lola94_Tire_LF
+    400046: Lola94_Tire_LR
+    400048: Lola94_Tire_RF
+    400050: Lola94_Tire_RR
+    400052: Lola94_wheel
+    400054: Lola94_wingle2_L
+    400056: Lola94_wingle2_R
+    400058: Lola94_wingle_L
+    400060: Lola94_wingle_R
+    2100000: LOLA94_Helmet
+    2100002: LOLA94_Carbody
+    2100004: LOLA94_Cockpit
+    2100006: Tire_Side
+    2100008: Tire_Tread
+    2100010: Tire_Rim
+    2100012: Brackedisk
+    2100014: LOLA94_Suspension
+    2100016: LOLA94_Calipers_Front
+    2100018: LOLA94_Calipers_Rear
+    2100020: LOLA94_Wheel
+    2100022: LOLA94_Engine
+    2100024: LOLA94_Floor
+    2100026: LOLA94_Antenas
+    2100028: LOLA94_Glass
+    2100030: LOLA94_Internals
+    2100032: Driver
+    2100034: 22 - Default
+    2300000: Lola94_Collision
+    2300002: Lola94_driver
+    2300004: Lola94_engine
+    2300006: Lola94_Enginecover
+    2300008: Lola94_Enginecover_wing
+    2300010: Lola94_FW_Oval
+    2300012: Lola94_FW_Road
+    2300014: Lola94_helmet
+    2300016: Lola94_Mainbody
+    2300018: Lola94_RW_oval
+    2300020: Lola94_RW_Road
+    2300022: Lola94_sidepod_L
+    2300024: Lola94_sidepod_R
+    2300026: Lola94_spind_LF
+    2300028: Lola94_spind_LR
+    2300030: Lola94_spind_RF
+    2300032: Lola94_spind_RR
+    2300034: Lola94_susp_LF
+    2300036: Lola94_susp_LR
+    2300038: Lola94_susp_RF
+    2300040: Lola94_susp_RR
+    2300042: Lola94_Tire_LF
+    2300044: Lola94_Tire_LR
+    2300046: Lola94_Tire_RF
+    2300048: Lola94_Tire_RR
+    2300050: Lola94_wheel
+    2300052: Lola94_wingle2_L
+    2300054: Lola94_wingle2_R
+    2300056: Lola94_wingle_L
+    2300058: Lola94_wingle_R
+    3300000: Lola94_Collision
+    3300002: Lola94_driver
+    3300004: Lola94_engine
+    3300006: Lola94_Enginecover
+    3300008: Lola94_Enginecover_wing
+    3300010: Lola94_FW_Oval
+    3300012: Lola94_FW_Road
+    3300014: Lola94_helmet
+    3300016: Lola94_Mainbody
+    3300018: Lola94_RW_oval
+    3300020: Lola94_RW_Road
+    3300022: Lola94_sidepod_L
+    3300024: Lola94_sidepod_R
+    3300026: Lola94_spind_LF
+    3300028: Lola94_spind_LR
+    3300030: Lola94_spind_RF
+    3300032: Lola94_spind_RR
+    3300034: Lola94_susp_LF
+    3300036: Lola94_susp_LR
+    3300038: Lola94_susp_RF
+    3300040: Lola94_susp_RR
+    3300042: Lola94_Tire_LF
+    3300044: Lola94_Tire_LR
+    3300046: Lola94_Tire_RF
+    3300048: Lola94_Tire_RR
+    3300050: Lola94_wheel
+    3300052: Lola94_wingle2_L
+    3300054: Lola94_wingle2_R
+    3300056: Lola94_wingle_L
+    3300058: Lola94_wingle_R
+    4300000: Lola94_helmet
+    4300002: Lola94_Enginecover
+    4300004: Lola94_RW_oval
+    4300006: Lola94_wingle2_L
+    4300008: Lola94_wingle2_R
+    4300010: Lola94_Tire_LF
+    4300012: Lola94_susp_LF
+    4300014: Lola94_Tire_RR
+    4300016: Lola94_Tire_LR
+    4300018: Lola94_spind_RF
+    4300020: Lola94_spind_LR
+    4300022: Lola94_spind_LF
+    4300024: Lola94_wheel
+    4300026: Lola94_susp_RF
+    4300028: Lola94_susp_RR
+    4300030: Lola94_susp_LR
+    4300032: Lola94_Enginecover_wing
+    4300034: Lola94_engine
+    4300036: Lola94_Mainbody
+    4300038: Lola94_RW_Road
+    4300040: Lola94_wingle_R
+    4300042: Lola94_sidepod_L
+    4300044: Lola94_FW_Road
+    4300046: Lola94_sidepod_R
+    4300048: Lola94_wingle_L
+    4300050: Lola94_Tire_RF
+    4300052: Lola94_driver
+    4300054: Lola94_spind_RR
+    4300056: Lola94_Collision
+    4300058: Lola94_FW_Oval
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 22 - Default
+    second: {fileID: 2100000, guid: 041ef11c5012b4649a35ceda7f6d5706, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brackedisk
+    second: {fileID: 2100000, guid: 26e09ef2414a73140ac803ecc8a4b6a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Driver
+    second: {fileID: 2100000, guid: e1b35ea11a2dcdf41aebe54dc3dfc8e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOLA94_Antenas
+    second: {fileID: 2100000, guid: 78c0a56fe528b7c44bcf39245603f663, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOLA94_Calipers_Front
+    second: {fileID: 2100000, guid: f236f86b1fc27074b91146290e3e1031, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOLA94_Calipers_Rear
+    second: {fileID: 2100000, guid: 5ee59e56d4df1ee4bb2b0228fb8726a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOLA94_Carbody
+    second: {fileID: 2100000, guid: b47936526883f50458c84e7202256a90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOLA94_Cockpit
+    second: {fileID: 2100000, guid: fe3a7c85028b31b408752534a326ee90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOLA94_Engine
+    second: {fileID: 2100000, guid: 3838699a329a6d1448a273b1013e7f03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOLA94_Floor
+    second: {fileID: 2100000, guid: bbd2e7315964da44690d1390077e4cc1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOLA94_Glass
+    second: {fileID: 2100000, guid: dfa9be4b803f21c43ad1c2602e8679d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOLA94_Helmet
+    second: {fileID: 2100000, guid: a941e9cd9eb4237489a325e769622096, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOLA94_Internals
+    second: {fileID: 2100000, guid: 253872fd1004e1a4d9faa4aacbcd4d11, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOLA94_Suspension
+    second: {fileID: 2100000, guid: 703537f007e0cc941936741926e278f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOLA94_Wheel
+    second: {fileID: 2100000, guid: c32e8c5231234ec4c979bc774fd62ec9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tire_Rim
+    second: {fileID: 2100000, guid: 17bea9a3dcd86ac45985ff65b024e2b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tire_Side
+    second: {fileID: 2100000, guid: 583a8d04eb1b4f0498175defdc17d297, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tire_Tread
+    second: {fileID: 2100000, guid: 36764da286427724fb8d4048b1370d96, type: 2}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 137364
+  packageName: Classic American Formula Pack
+  packageVersion: 1.0
+  assetPath: Assets/Classic_American_Formula_Pack/Meshes/Lola94.FBX
+  uploadId: 288329

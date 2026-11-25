@@ -1,0 +1,332 @@
+fileFormatVersion: 2
+guid: 72566495a35e65b4eb89862beceae71a
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: C1_camaras
+    100002: C2_camaras
+    100004: D_engineconver_A
+    100006: DF_FWA
+    100008: FORD_ENGINE_A
+    100010: H_engineconver_A
+    100012: //RootNode
+    100014: Lola_COCKPIT
+    100016: Lola_colision
+    100018: Lola_frontcover_A
+    100020: Lola_nosecone_A
+    100022: LOLA_OVAL_FWA
+    100024: LOLA_OVAL_RWA
+    100026: Lola_RWA
+    100028: Lola_sidepod_LA
+    100030: Lola_sidepod_RA
+    100032: Lola_SPIND_LFA
+    100034: Lola_SPIND_LRA
+    100036: Lola_SPIND_RFA
+    100038: Lola_SPIND_RRA
+    100040: Lola_STEERINGWHEEL
+    100042: Lola_STEERINGWHEEL_HI
+    100044: Lola_SUSP_LFA
+    100046: Lola_SUSP_LRA
+    100048: Lola_SUSP_RFA
+    100050: Lola_SUSP_RRA
+    100052: LOLA_tach
+    100054: lola_tach
+    100056: Lola_VA
+    100058: Lola_winglet1_LA
+    100060: Lola_winglet1_RA
+    100062: Lola_winglet2_LA
+    100064: Lola_winglet2_RA
+    100066: NH_FWA
+    100068: Lola_driver
+    100070: Lola_helmet
+    400000: C1_camaras
+    400002: C2_camaras
+    400004: D_engineconver_A
+    400006: DF_FWA
+    400008: FORD_ENGINE_A
+    400010: H_engineconver_A
+    400012: //RootNode
+    400014: Lola_COCKPIT
+    400016: Lola_colision
+    400018: Lola_frontcover_A
+    400020: Lola_nosecone_A
+    400022: LOLA_OVAL_FWA
+    400024: LOLA_OVAL_RWA
+    400026: Lola_RWA
+    400028: Lola_sidepod_LA
+    400030: Lola_sidepod_RA
+    400032: Lola_SPIND_LFA
+    400034: Lola_SPIND_LRA
+    400036: Lola_SPIND_RFA
+    400038: Lola_SPIND_RRA
+    400040: Lola_STEERINGWHEEL
+    400042: Lola_STEERINGWHEEL_HI
+    400044: Lola_SUSP_LFA
+    400046: Lola_SUSP_LRA
+    400048: Lola_SUSP_RFA
+    400050: Lola_SUSP_RRA
+    400052: LOLA_tach
+    400054: lola_tach
+    400056: Lola_VA
+    400058: Lola_winglet1_LA
+    400060: Lola_winglet1_RA
+    400062: Lola_winglet2_LA
+    400064: Lola_winglet2_RA
+    400066: NH_FWA
+    400068: Lola_driver
+    400070: Lola_helmet
+    2100000: 'Material #41'
+    2100002: 'Material #42'
+    2100004: Carbody
+    2100006: Suspension
+    2100008: Floor
+    2100010: 'Material #37'
+    2100012: 'Material #43'
+    2100014: 'Material #57'
+    2100016: 'Material #58'
+    2100018: 'Material #59'
+    2100020: 'Material #62'
+    2100022: 'Material #68'
+    2100024: 'Material #74'
+    2100026: 'Material #80'
+    2100028: 'Material #86'
+    2100030: 'Material #65'
+    2100032: 'Material #64'
+    2100034: 'Material #63'
+    2100036: 'Material #60'
+    2100038: 'Material #61'
+    2100040: 'Material #71'
+    2100042: 'Material #70'
+    2100044: 'Material #69'
+    2100046: 'Material #66'
+    2100048: 'Material #67'
+    2100050: 'Material #77'
+    2100052: 'Material #76'
+    2100054: 'Material #75'
+    2100056: 'Material #72'
+    2100058: 'Material #73'
+    2100060: 'Material #83'
+    2100062: 'Material #82'
+    2100064: 'Material #81'
+    2100066: 'Material #78'
+    2100068: 'Material #79'
+    2100070: 'Material #89'
+    2100072: 'Material #88'
+    2100074: 'Material #87'
+    2100076: 'Material #84'
+    2100078: 'Material #85'
+    2100080: 'Material #90'
+    2100082: 'Material #91'
+    2100084: 'Material #92'
+    2100086: 'Material #55'
+    2100088: 'Material #54'
+    2100090: 'Material #45'
+    2100092: Mirrors
+    2100094: Glass
+    2100096: 'Material #48'
+    2100098: 'Material #49'
+    2100100: 'Material #38'
+    2100102: 'Material #51'
+    2100104: 'Material #47'
+    2100106: 'Material #96'
+    2100108: 'Material #97'
+    2100110: LOLA94_Calipers_Front
+    2100112: LOLA94_Suspension
+    2100114: 'Material #46'
+    2100116: 'Material #50'
+    2300000: C1_camaras
+    2300002: C2_camaras
+    2300004: D_engineconver_A
+    2300006: DF_FWA
+    2300008: FORD_ENGINE_A
+    2300010: H_engineconver_A
+    2300012: Lola_COCKPIT
+    2300014: Lola_colision
+    2300016: Lola_frontcover_A
+    2300018: Lola_nosecone_A
+    2300020: LOLA_OVAL_FWA
+    2300022: LOLA_OVAL_RWA
+    2300024: Lola_RWA
+    2300026: Lola_sidepod_LA
+    2300028: Lola_sidepod_RA
+    2300030: Lola_SPIND_LFA
+    2300032: Lola_SPIND_LRA
+    2300034: Lola_SPIND_RFA
+    2300036: Lola_SPIND_RRA
+    2300038: Lola_STEERINGWHEEL
+    2300040: Lola_STEERINGWHEEL_HI
+    2300042: Lola_SUSP_LFA
+    2300044: Lola_SUSP_LRA
+    2300046: Lola_SUSP_RFA
+    2300048: Lola_SUSP_RRA
+    2300050: LOLA_tach
+    2300052: lola_tach
+    2300054: Lola_VA
+    2300056: Lola_winglet1_LA
+    2300058: Lola_winglet1_RA
+    2300060: Lola_winglet2_LA
+    2300062: Lola_winglet2_RA
+    2300064: NH_FWA
+    2300066: Lola_driver
+    2300068: Lola_helmet
+    3300000: C1_camaras
+    3300002: C2_camaras
+    3300004: D_engineconver_A
+    3300006: DF_FWA
+    3300008: FORD_ENGINE_A
+    3300010: H_engineconver_A
+    3300012: Lola_COCKPIT
+    3300014: Lola_colision
+    3300016: Lola_frontcover_A
+    3300018: Lola_nosecone_A
+    3300020: LOLA_OVAL_FWA
+    3300022: LOLA_OVAL_RWA
+    3300024: Lola_RWA
+    3300026: Lola_sidepod_LA
+    3300028: Lola_sidepod_RA
+    3300030: Lola_SPIND_LFA
+    3300032: Lola_SPIND_LRA
+    3300034: Lola_SPIND_RFA
+    3300036: Lola_SPIND_RRA
+    3300038: Lola_STEERINGWHEEL
+    3300040: Lola_STEERINGWHEEL_HI
+    3300042: Lola_SUSP_LFA
+    3300044: Lola_SUSP_LRA
+    3300046: Lola_SUSP_RFA
+    3300048: Lola_SUSP_RRA
+    3300050: LOLA_tach
+    3300052: lola_tach
+    3300054: Lola_VA
+    3300056: Lola_winglet1_LA
+    3300058: Lola_winglet1_RA
+    3300060: Lola_winglet2_LA
+    3300062: Lola_winglet2_RA
+    3300064: NH_FWA
+    3300066: Lola_driver
+    3300068: Lola_helmet
+    4300000: Lola_STEERINGWHEEL
+    4300002: NH_FWA
+    4300004: Lola_RWA
+    4300006: Lola_nosecone_A
+    4300008: D_engineconver_A
+    4300010: Lola_sidepod_LA
+    4300012: Lola_sidepod_RA
+    4300014: Lola_winglet1_LA
+    4300016: Lola_winglet1_RA
+    4300018: C1_camaras
+    4300020: DF_FWA
+    4300022: H_engineconver_A
+    4300024: LOLA_OVAL_FWA
+    4300026: LOLA_OVAL_RWA
+    4300028: Lola_winglet2_RA
+    4300030: Lola_winglet2_LA
+    4300032: Lola_colision
+    4300034: C2_camaras
+    4300036: Lola_frontcover_A
+    4300038: lola_tach
+    4300040: LOLA_tach
+    4300042: Lola_COCKPIT
+    4300044: FORD_ENGINE_A
+    4300046: Lola_STEERINGWHEEL_HI
+    4300048: Lola_VA
+    4300050: Lola_SPIND_RFA
+    4300052: Lola_SUSP_RFA
+    4300054: Lola_SUSP_LFA
+    4300056: Lola_SPIND_LFA
+    4300058: Lola_SUSP_LRA
+    4300060: Lola_SPIND_LRA
+    4300062: Lola_SUSP_RRA
+    4300064: Lola_SPIND_RRA
+    4300066: Lola_helmet
+    4300068: Lola_driver
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 137364
+  packageName: Classic American Formula Pack
+  packageVersion: 1.0
+  assetPath: Assets/Classic_American_Formula_Pack/Meshes/Lola95.FBX
+  uploadId: 288329
