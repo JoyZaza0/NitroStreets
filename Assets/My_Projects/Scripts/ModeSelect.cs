@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 using ALIyerEdon;
 
 public enum GameMode
@@ -18,6 +19,12 @@ public static class GameModeSaveKeys
 
     public static GameMode GetActiveMode()
     {
+        Scene activeScene = SceneManager.GetActiveScene();
+        if (activeScene.IsValid() && TryDetectModeFromSceneName(activeScene.name, out GameMode sceneMode))
+        {
+            return sceneMode;
+        }
+
         int raw = PlayerPrefs.GetInt(ActiveModeKey, (int)GameMode.Career);
         if (Enum.IsDefined(typeof(GameMode), raw))
             return (GameMode)raw;
@@ -30,6 +37,83 @@ public static class GameModeSaveKeys
         if (NitroStreets.Fuel.ModeFuelManager.Instance != null)
         {
             NitroStreets.Fuel.ModeFuelManager.Instance.ActiveMode = mode;
+        }
+    }
+
+    public static bool TryDetectModeFromSceneName(string sceneName, out GameMode detectedMode)
+    {
+        detectedMode = GameMode.Career;
+        if (string.IsNullOrWhiteSpace(sceneName))
+            return false;
+
+        if (sceneName.StartsWith("F1_", StringComparison.OrdinalIgnoreCase) ||
+            sceneName.IndexOf("Formula", StringComparison.OrdinalIgnoreCase) >= 0)
+        {
+            detectedMode = GameMode.Formula1;
+            return true;
+        }
+
+        if (sceneName.StartsWith("Offroad_", StringComparison.OrdinalIgnoreCase) ||
+            sceneName.IndexOf("Offroad", StringComparison.OrdinalIgnoreCase) >= 0)
+        {
+            detectedMode = GameMode.Offroad;
+            return true;
+        }
+
+        if (sceneName.StartsWith("Career_", StringComparison.OrdinalIgnoreCase) ||
+            sceneName.IndexOf("Career", StringComparison.OrdinalIgnoreCase) >= 0)
+        {
+            detectedMode = GameMode.Career;
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Извлекает 0-based индекс уровня из имени сцены вида "F1_Track_1" -> 0, "Career_Track_12" -> 11.
+    /// </summary>
+    public static bool TryParseTrackLevelIndexFromSceneName(string sceneName, out int levelIndex)
+    {
+        levelIndex = -1;
+        if (string.IsNullOrWhiteSpace(sceneName))
+            return false;
+
+        int end = sceneName.Length - 1;
+        while (end >= 0 && !char.IsDigit(sceneName[end]))
+        {
+            end--;
+        }
+
+        if (end < 0)
+            return false;
+
+        int start = end;
+        while (start >= 0 && char.IsDigit(sceneName[start]))
+        {
+            start--;
+        }
+
+        string numberPart = sceneName.Substring(start + 1, end - start);
+        if (int.TryParse(numberPart, out int trackNumber) && trackNumber >= 1)
+        {
+            levelIndex = trackNumber - 1;
+            return true;
+        }
+
+        return false;
+    }
+
+    public static int GetDefaultMaxLevelsForMode(GameMode mode)
+    {
+        switch (mode)
+        {
+            case GameMode.Career:
+                return 24;
+            case GameMode.Formula1:
+                return 30;
+            default:
+                return 30;
         }
     }
 

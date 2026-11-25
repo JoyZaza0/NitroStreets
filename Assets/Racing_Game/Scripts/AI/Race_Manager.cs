@@ -25,6 +25,8 @@ namespace ALIyerEdon
         [Space(5)]
         public int levelID = 0;
         public string trackName = "Level 1";
+        [Tooltip("Автоматически определять режим и levelID из имени сцены (например, F1_Track_7 -> levelID = 6)")]
+        public bool autoDetectLevelIdFromSceneName = true;
 
         public bool startCutscene = false;
 
@@ -107,6 +109,18 @@ namespace ALIyerEdon
 
         void Start()
         {
+            string activeSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            if (GameModeSaveKeys.TryDetectModeFromSceneName(activeSceneName, out GameMode sceneMode))
+            {
+                GameModeSaveKeys.SetActiveMode(sceneMode);
+            }
+
+            if (autoDetectLevelIdFromSceneName &&
+                GameModeSaveKeys.TryParseTrackLevelIndexFromSceneName(activeSceneName, out int parsedLevelIndex))
+            {
+                levelID = parsedLevelIndex;
+            }
+
             FindFirstObjectByType<ControllerMouseSimulator>().Update_CursorIcon(true);
 
             AudioListener.volume = 1f;
