@@ -288,7 +288,7 @@ PlayerSettings:
   AndroidEnableTango: 0
   androidEnableBanner: 1
   androidUseLowAccuracyLocation: 0
-  androidUseCustomKeystore: 1
+  androidUseCustomKeystore: 0
   m_AndroidBanners:
   - width: 320
     height: 180
@@ -948,7 +948,13 @@ PlayerSettings:
   enableDirectStorage: 0
   cloudProjectId: 60fd20ce-b03d-4c9a-ab6d-5b2513e8ae2c
   framebufferDepthMemorylessMode: 0
-  qualitySettingsNames: []
+  qualitySettingsNames:
+  - Very Low
+  - Low
+  - Medium
+  - High
+  - Ultra
+  - Max
   projectName: Racing_2
   organizationId: gevorgyan-garik
   cloudEnabled: 0

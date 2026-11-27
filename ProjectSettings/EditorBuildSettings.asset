@@ -12,76 +12,121 @@ EditorBuildSettings:
     path: Assets/My_Projects/Scenes/Garage.unity
     guid: 8128280ba3a61064bb39225e60f3ed24
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_1.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_1.unity
     guid: 23f9795742ccd644aa3b11dc4762016f
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_2.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_2.unity
     guid: 9f03afe7eee977a40889bff95d61dc13
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_3.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_3.unity
     guid: 19151612e7f737742ad330cfaf7a64ea
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_4.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_4.unity
     guid: d027a0b332aec214b8ba732a703e58db
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_5.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_5.unity
     guid: 2064caf9c78e6d44ea7ad0d4f9637bd8
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_6.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_6.unity
     guid: eeff870824ba9a541a054e0ca7a1ece6
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_7.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_7.unity
     guid: f650e575a0f6d124680daa92344f3153
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_8.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_8.unity
     guid: 44604cebc0026804e976ac0cd3138c78
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_9.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_9.unity
     guid: ab648620748bb95438d48b0dd7fa17b1
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_10.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_10.unity
     guid: 868ccf7a00a768944afb20c6a688125f
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_11.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_11.unity
     guid: 54b92845ec8ef244d80a41e79c114d10
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_12.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_12.unity
     guid: 08c8446126d2c6841840d70415cf450a
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_13.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_13.unity
     guid: 074edced795957c41b80db35224a7a3c
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_14.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_14.unity
     guid: 805231b0ea6e02145bec9efa170d0ac2
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_15.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_15.unity
     guid: f465494fd1044f746b2db00257cc8a31
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_16.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_16.unity
     guid: cf732b8d47a0f0e40bdbb73bf4b409b6
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_17.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_17.unity
     guid: 9d92c4e3e6f8f864292a949a45a50f43
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_18.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_18.unity
     guid: 33f486b4bc6e9e8499ba4f300a7b721c
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_19.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_19.unity
     guid: cd3b2352dd2b0f5458ea3f1669b67004
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_20.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_20.unity
     guid: e696e00ee18ec3940824bafee5bf28a0
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_21.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_21.unity
     guid: 65f2628b3226971439b36481eddd6118
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_22.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_22.unity
     guid: 5b86c00ea8f4aa44e8d828eebefe5dbd
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_23.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_23.unity
     guid: 1a83941fe3c822c448a1474b7dcbd563
   - enabled: 1
-    path: Assets/My_Projects/Scenes/Career_Track_24.unity
+    path: Assets/My_Projects/Scenes/Career/Career_Track_24.unity
     guid: 23630ad9ad95ced449c89f6df6c3d6b9
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_1.unity
+    guid: 5a17a89e3ff5c944895210464d8e53ab
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_2.unity
+    guid: 472418bfd078f1941a6abd2960769ced
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_3.unity
+    guid: 911bc6ee80ed1ad45b4ebbc45f320ea6
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_4.unity
+    guid: 3085b9b9518cc4644b7c789c09fa4bbe
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_5.unity
+    guid: 95a59f059b6c2a74d86d464aa01084c3
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_6.unity
+    guid: e6a0c2d228c58774081857cd486afadb
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_7.unity
+    guid: e1d3f55ad450067468a2469f00978df7
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_8.unity
+    guid: cadcf3989cd14a04496b7acdb34c1093
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_9.unity
+    guid: 49fcc62655340b740a327f61af132d1d
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_10.unity
+    guid: 29a1ec4795cff1f4aa0908f29812b597
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_11.unity
+    guid: 350222d57ccc7704c8ed9483590155ac
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_12.unity
+    guid: 8827ad5359758ab478fd6831f6283178
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_13.unity
+    guid: df43ab04d26ad5545995464cd56db978
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_14.unity
+    guid: 8523a37f56c49164eb1f8f96150787db
+  - enabled: 1
+    path: Assets/My_Projects/Scenes/F1/F1_Track_15.unity
+    guid: 6d0f39c78136cd649bae95290c991f40
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

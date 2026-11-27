@@ -111,8 +111,30 @@ public class AntigravityScriptEditor : IExternalCodeEditor
         }
     }
 
+    private static bool IsSupportedPath(string path)
+    {
+        // Path is empty with "Open C# Project"
+        if (string.IsNullOrEmpty(path))
+            return true;
+
+        string extension = Path.GetExtension(path);
+        if (string.IsNullOrEmpty(extension))
+            return false;
+
+        string extensionWithoutDot = extension.TrimStart('.');
+        return extensionWithoutDot.Equals("asmdef", StringComparison.OrdinalIgnoreCase)
+            || extensionWithoutDot.Equals("asmref", StringComparison.OrdinalIgnoreCase)
+            || extensionWithoutDot.Equals("json", StringComparison.OrdinalIgnoreCase)
+            || extensionWithoutDot.Equals("md", StringComparison.OrdinalIgnoreCase)
+            || EditorSettings.projectGenerationBuiltinExtensions.Contains(extensionWithoutDot, StringComparer.OrdinalIgnoreCase)
+            || EditorSettings.projectGenerationUserExtensions.Contains(extensionWithoutDot, StringComparer.OrdinalIgnoreCase);
+    }
+
     public bool OpenProject(string filePath, int line, int column)
     {
+        if (!IsSupportedPath(filePath))
+            return false;
+
         string installation = CodeEditor.CurrentEditorInstallation;
         string executable = GetExecutablePath(installation);
         string projectDir = Directory.GetCurrentDirectory();
