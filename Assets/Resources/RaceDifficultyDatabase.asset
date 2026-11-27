@@ -1,0 +1,504 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d044feb7962e1ce41b6c069bd382901f, type: 3}
+  m_Name: RaceDifficultyDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::NitroStreets.Difficulty.RaceDifficultyDatabase
+  modes:
+  - mode: 0
+    applyOverrides: 0
+    clampOutOfRangeLevel: 1
+    generator:
+      levelCount: 24
+      startEnginePower: 1900
+      endEnginePower: 3400
+      startSpeedMin: 50
+      endSpeedMin: 90
+      startSpeedMax: 95
+      endSpeedMax: 170
+      speedChangeInterval: 5
+      progressionCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      useNitroProgression: 0
+      nitroX1StartLevel: 6
+      nitroX2StartLevel: 15
+      nitroX3StartLevel: 24
+      startNitroDelay: 7
+      endNitroDelay: 3.5
+    levels: []
+  - mode: 1
+    applyOverrides: 1
+    clampOutOfRangeLevel: 1
+    generator:
+      levelCount: 15
+      startEnginePower: 1900
+      endEnginePower: 3400
+      startSpeedMin: 50
+      endSpeedMin: 95
+      startSpeedMax: 90
+      endSpeedMax: 175
+      speedChangeInterval: 5
+      progressionCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      useNitroProgression: 1
+      nitroX1StartLevel: 4
+      nitroX2StartLevel: 8
+      nitroX3StartLevel: 12
+      startNitroDelay: 7
+      endNitroDelay: 3.5
+    levels:
+    - label: Level 1
+      enginePower: 1900
+      speedMin: 50
+      speedMax: 90
+      speedChangeInterval: 5
+      enableNitro: 0
+      nitroBoost: 1
+      nitroRandomizerDelay: 7
+    - label: Level 2
+      enginePower: 2010
+      speedMin: 53
+      speedMax: 96
+      speedChangeInterval: 5
+      enableNitro: 0
+      nitroBoost: 1
+      nitroRandomizerDelay: 6.8
+    - label: Level 3
+      enginePower: 2110
+      speedMin: 56
+      speedMax: 102
+      speedChangeInterval: 5
+      enableNitro: 0
+      nitroBoost: 1
+      nitroRandomizerDelay: 6.5
+    - label: Level 4
+      enginePower: 2220
+      speedMin: 60
+      speedMax: 108
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 6.2
+    - label: Level 5
+      enginePower: 2330
+      speedMin: 63
+      speedMax: 114
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 6
+    - label: Level 6
+      enginePower: 2440
+      speedMin: 66
+      speedMax: 120
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 5.8
+    - label: Level 7
+      enginePower: 2540
+      speedMin: 69
+      speedMax: 126
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 5.5
+    - label: Level 8
+      enginePower: 2650
+      speedMin: 72
+      speedMax: 132
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 5.2
+    - label: Level 9
+      enginePower: 2760
+      speedMin: 76
+      speedMax: 139
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 5
+    - label: Level 10
+      enginePower: 2860
+      speedMin: 79
+      speedMax: 145
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 4.8
+    - label: Level 11
+      enginePower: 2970
+      speedMin: 82
+      speedMax: 151
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 4.5
+    - label: Level 12
+      enginePower: 3080
+      speedMin: 85
+      speedMax: 157
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 3
+      nitroRandomizerDelay: 4.2
+    - label: Level 13
+      enginePower: 3190
+      speedMin: 89
+      speedMax: 163
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 3
+      nitroRandomizerDelay: 4
+    - label: Level 14
+      enginePower: 3290
+      speedMin: 92
+      speedMax: 169
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 3
+      nitroRandomizerDelay: 3.8
+    - label: Level 15
+      enginePower: 3400
+      speedMin: 95
+      speedMax: 175
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 3
+      nitroRandomizerDelay: 3.5
+  - mode: 2
+    applyOverrides: 1
+    clampOutOfRangeLevel: 1
+    generator:
+      levelCount: 30
+      startEnginePower: 1800
+      endEnginePower: 3100
+      startSpeedMin: 45
+      endSpeedMin: 85
+      startSpeedMax: 80
+      endSpeedMax: 150
+      speedChangeInterval: 5
+      progressionCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      useNitroProgression: 1
+      nitroX1StartLevel: 6
+      nitroX2StartLevel: 15
+      nitroX3StartLevel: 24
+      startNitroDelay: 7
+      endNitroDelay: 3.5
+    levels:
+    - label: Level 1
+      enginePower: 1800
+      speedMin: 45
+      speedMax: 80
+      speedChangeInterval: 5
+      enableNitro: 0
+      nitroBoost: 1
+      nitroRandomizerDelay: 7
+    - label: Level 2
+      enginePower: 1840
+      speedMin: 46
+      speedMax: 82
+      speedChangeInterval: 5
+      enableNitro: 0
+      nitroBoost: 1
+      nitroRandomizerDelay: 6.9
+    - label: Level 3
+      enginePower: 1890
+      speedMin: 48
+      speedMax: 85
+      speedChangeInterval: 5
+      enableNitro: 0
+      nitroBoost: 1
+      nitroRandomizerDelay: 6.8
+    - label: Level 4
+      enginePower: 1930
+      speedMin: 49
+      speedMax: 87
+      speedChangeInterval: 5
+      enableNitro: 0
+      nitroBoost: 1
+      nitroRandomizerDelay: 6.6
+    - label: Level 5
+      enginePower: 1980
+      speedMin: 51
+      speedMax: 90
+      speedChangeInterval: 5
+      enableNitro: 0
+      nitroBoost: 1
+      nitroRandomizerDelay: 6.5
+    - label: Level 6
+      enginePower: 2020
+      speedMin: 52
+      speedMax: 92
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 6.4
+    - label: Level 7
+      enginePower: 2070
+      speedMin: 53
+      speedMax: 94
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 6.3
+    - label: Level 8
+      enginePower: 2110
+      speedMin: 55
+      speedMax: 97
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 6.2
+    - label: Level 9
+      enginePower: 2160
+      speedMin: 56
+      speedMax: 99
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 6
+    - label: Level 10
+      enginePower: 2200
+      speedMin: 57
+      speedMax: 102
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 5.9
+    - label: Level 11
+      enginePower: 2250
+      speedMin: 59
+      speedMax: 104
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 5.8
+    - label: Level 12
+      enginePower: 2290
+      speedMin: 60
+      speedMax: 107
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 5.7
+    - label: Level 13
+      enginePower: 2340
+      speedMin: 62
+      speedMax: 109
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 5.6
+    - label: Level 14
+      enginePower: 2380
+      speedMin: 63
+      speedMax: 111
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 1
+      nitroRandomizerDelay: 5.4
+    - label: Level 15
+      enginePower: 2430
+      speedMin: 64
+      speedMax: 114
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 5.3
+    - label: Level 16
+      enginePower: 2470
+      speedMin: 66
+      speedMax: 116
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 5.2
+    - label: Level 17
+      enginePower: 2520
+      speedMin: 67
+      speedMax: 119
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 5.1
+    - label: Level 18
+      enginePower: 2560
+      speedMin: 68
+      speedMax: 121
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 4.9
+    - label: Level 19
+      enginePower: 2610
+      speedMin: 70
+      speedMax: 123
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 4.8
+    - label: Level 20
+      enginePower: 2650
+      speedMin: 71
+      speedMax: 126
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 4.7
+    - label: Level 21
+      enginePower: 2700
+      speedMin: 73
+      speedMax: 128
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 4.6
+    - label: Level 22
+      enginePower: 2740
+      speedMin: 74
+      speedMax: 131
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 4.5
+    - label: Level 23
+      enginePower: 2790
+      speedMin: 75
+      speedMax: 133
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 2
+      nitroRandomizerDelay: 4.3
+    - label: Level 24
+      enginePower: 2830
+      speedMin: 77
+      speedMax: 136
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 3
+      nitroRandomizerDelay: 4.2
+    - label: Level 25
+      enginePower: 2880
+      speedMin: 78
+      speedMax: 138
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 3
+      nitroRandomizerDelay: 4.1
+    - label: Level 26
+      enginePower: 2920
+      speedMin: 79
+      speedMax: 140
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 3
+      nitroRandomizerDelay: 4
+    - label: Level 27
+      enginePower: 2970
+      speedMin: 81
+      speedMax: 143
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 3
+      nitroRandomizerDelay: 3.9
+    - label: Level 28
+      enginePower: 3010
+      speedMin: 82
+      speedMax: 145
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 3
+      nitroRandomizerDelay: 3.7
+    - label: Level 29
+      enginePower: 3060
+      speedMin: 84
+      speedMax: 148
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 3
+      nitroRandomizerDelay: 3.6
+    - label: Level 30
+      enginePower: 3100
+      speedMin: 85
+      speedMax: 150
+      speedChangeInterval: 5
+      enableNitro: 1
+      nitroBoost: 3
+      nitroRandomizerDelay: 3.5

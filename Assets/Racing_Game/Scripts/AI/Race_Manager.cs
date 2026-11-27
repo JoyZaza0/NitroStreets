@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using ALIyerEdon;
+using NitroStreets.Difficulty;
 
 namespace ALIyerEdon
 {
@@ -27,6 +28,9 @@ namespace ALIyerEdon
         public string trackName = "Level 1";
         [Tooltip("Автоматически определять режим и levelID из имени сцены (например, F1_Track_7 -> levelID = 6)")]
         public bool autoDetectLevelIdFromSceneName = true;
+
+        [Tooltip("Опциональная база сложности гонщиков. Если пусто, автоматически загружается Resources/RaceDifficultyDatabase.")]
+        public RaceDifficultyDatabase difficultyDatabase;
 
         public bool startCutscene = false;
 
@@ -172,11 +176,24 @@ namespace ALIyerEdon
                 totalRacerPrefabs.Length - 1,
                 totalRacerPrefabs[0].GetComponent<Car_Position>().RacerName);
 
+            // Resolve level difficulty override for AI racers (if enabled for activeMode)
+            RaceDifficultyDatabase activeDifficultyDb = difficultyDatabase != null
+                ? difficultyDatabase
+                : RaceDifficultyDatabase.LoadDefault();
+            LevelRacerConfig activeLevelDifficulty = null;
+            bool hasLevelDifficultyOverride = activeDifficultyDb != null &&
+                activeDifficultyDb.TryGetConfig(activeMode, levelID, out activeLevelDifficulty);
+
             // Instantiate racers and prefabs
             for (int i = 0; i < totalRacerPrefabs.Length; i++)
             {
                 GameObject racer = Instantiate(totalRacerPrefabs[i], spawnPositions[i].position,
                      spawnPositions[i].rotation) as GameObject;
+
+                if (i > 0 && hasLevelDifficultyOverride)
+                {
+                    activeLevelDifficulty.ApplyTo(racer);
+                }
 
                 // Instantiate minimap arrow icon for player
                 if (i == 0)
@@ -466,7 +483,10 @@ namespace ALIyerEdon
             FindObjectOfType<Nitro_Feature>().raceIsStarted = true;
 
             foreach (Racer_Nitro rn in GameObject.FindObjectsOfType<Racer_Nitro>())
-                rn.raceIsStarted = true;
+            {
+                if (rn.enabled)
+                    rn.raceIsStarted = true;
+            }
 
             yield return new WaitForSeconds(
                 GameObject.FindGameObjectWithTag("Player")

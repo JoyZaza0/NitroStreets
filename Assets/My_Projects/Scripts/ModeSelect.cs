@@ -111,7 +111,7 @@ public static class GameModeSaveKeys
             case GameMode.Career:
                 return 24;
             case GameMode.Formula1:
-                return 30;
+                return 15;
             default:
                 return 30;
         }
