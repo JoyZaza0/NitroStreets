@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ALIyerEdon;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -54,7 +55,17 @@ public sealed class PlayerProgressionDisplay : MonoBehaviour
     [Tooltip("Автоматически встраивать аккуратную шкалу уровня и опыта в каждый блок Player_Profile во всех меню Гаража")]
     [SerializeField] private bool autoAttachToPlayerProfiles = true;
 
+    [Header("Race Scene Visibility")]
+    [Tooltip("В гоночной сцене показывать оверлей прогрессии только когда открыта панель старта или финиша гонки")]
+    [SerializeField] private bool showOnlyOnRaceStartAndFinish = true;
+
+    public const string RacePrefabResourcePath = "RaceProgressionPanel";
+
     private readonly List<ProgressionUIEntry> activeEntries = new List<ProgressionUIEntry>();
+    private GameObject defaultUiRoot;
+    private Race_Manager cachedRaceManager;
+    private Start_Finish_UI cachedStartFinishUi;
+    private bool isRaceScene;
 
     private static bool isSubscribedToSceneLoaded;
 
@@ -77,14 +88,15 @@ public sealed class PlayerProgressionDisplay : MonoBehaviour
 
     public static PlayerProgressionDisplay EnsureInstance()
     {
-        PlayerProgressionDisplay existing = FindFirstObjectByType<PlayerProgressionDisplay>();
+        PlayerProgressionDisplay existing = FindFirstObjectByType<PlayerProgressionDisplay>(FindObjectsInactive.Include);
         if (existing != null)
             return existing;
 
         Canvas mainCanvas = FindFirstObjectByType<Canvas>();
         if (mainCanvas != null)
         {
-            return mainCanvas.gameObject.AddComponent<PlayerProgressionDisplay>();
+            GameObject host = new GameObject("PlayerProgressionDisplay");
+            return host.AddComponent<PlayerProgressionDisplay>();
         }
 
         return null;
@@ -93,6 +105,12 @@ public sealed class PlayerProgressionDisplay : MonoBehaviour
     private void Awake()
     {
         InitializeEntries();
+        CacheRaceSceneReferences();
+
+        if (isRaceScene && showOnlyOnRaceStartAndFinish && defaultUiRoot != null)
+        {
+            defaultUiRoot.SetActive(false);
+        }
     }
 
     private void OnEnable()
@@ -104,6 +122,61 @@ public sealed class PlayerProgressionDisplay : MonoBehaviour
     private void OnDisable()
     {
         PlayerProgression.ExperienceChanged -= RefreshAll;
+    }
+
+    private void OnDestroy()
+    {
+        if (defaultUiRoot != null)
+        {
+            Destroy(defaultUiRoot);
+            defaultUiRoot = null;
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (!isRaceScene || !showOnlyOnRaceStartAndFinish || defaultUiRoot == null)
+            return;
+
+        bool shouldShow = IsRaceStartOrFinishPanelActive();
+        if (defaultUiRoot.activeSelf != shouldShow)
+        {
+            defaultUiRoot.SetActive(shouldShow);
+            if (shouldShow)
+            {
+                RefreshAll(PlayerProgression.TotalExperience);
+            }
+        }
+    }
+
+    private void CacheRaceSceneReferences()
+    {
+        cachedRaceManager = FindFirstObjectByType<Race_Manager>(FindObjectsInactive.Include);
+        cachedStartFinishUi = FindFirstObjectByType<Start_Finish_UI>(FindObjectsInactive.Include);
+        isRaceScene = cachedRaceManager != null || cachedStartFinishUi != null;
+    }
+
+    private bool IsRaceStartOrFinishPanelActive()
+    {
+        if (cachedRaceManager != null)
+        {
+            if (cachedRaceManager.startUI != null && cachedRaceManager.startUI.activeInHierarchy)
+                return true;
+
+            if (cachedRaceManager.raceFinishUI != null && cachedRaceManager.raceFinishUI.activeInHierarchy)
+                return true;
+        }
+
+        if (cachedStartFinishUi != null)
+        {
+            if (cachedStartFinishUi.finishRaceMenu != null && cachedStartFinishUi.finishRaceMenu.activeInHierarchy)
+                return true;
+
+            if (cachedStartFinishUi.startButton != null && cachedStartFinishUi.startButton.activeInHierarchy)
+                return true;
+        }
+
+        return false;
     }
 
     private void InitializeEntries()
@@ -139,11 +212,128 @@ public sealed class PlayerProgressionDisplay : MonoBehaviour
             SetupGaragePlayerProfiles();
         }
 
-        // 4. Fallback оверлей, если вообще ничего не найдено и не привязано
-        if (activeEntries.Count == 0)
+        // 3.5. Подключаемся к уже размещённым в сцене RaceProgressionPanelView (например, внутри Race_Manager/Racing_UI/Start_UI/TopUI)
+        AttachSceneProgressionViews();
+
+        // 4. Префаб из Resources/RaceProgressionPanel или fallback оверлей из кода
+        if (activeEntries.Count == 0 && !TryCreateFromPrefab())
         {
             CreateDefaultUi();
         }
+    }
+
+    private void AttachSceneProgressionViews()
+    {
+        RaceProgressionPanelView[] views = FindObjectsByType<RaceProgressionPanelView>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        for (int i = 0; i < views.Length; i++)
+        {
+            RaceProgressionPanelView view = views[i];
+            if (view == null)
+                continue;
+
+            Slider viewSlider = view.experienceSlider != null
+                ? view.experienceSlider
+                : view.GetComponentInChildren<Slider>(true);
+            Text viewLevel = view.levelText;
+            Text viewXp = view.experienceText;
+
+            if (viewLevel == null || viewXp == null)
+            {
+                Text[] texts = view.GetComponentsInChildren<Text>(true);
+                for (int t = 0; t < texts.Length; t++)
+                {
+                    if (texts[t] == null)
+                        continue;
+
+                    if (viewLevel == null && (texts[t].name == "LevelText" || texts[t].name == "LevelBadge"))
+                        viewLevel = texts[t];
+                    else if (viewXp == null && texts[t].name == "ExperienceText")
+                        viewXp = texts[t];
+                }
+            }
+
+            if (viewSlider == null && viewLevel == null && viewXp == null)
+                continue;
+
+            bool alreadyAdded = false;
+            for (int e = 0; e < activeEntries.Count; e++)
+            {
+                ProgressionUIEntry existing = activeEntries[e];
+                if (existing != null &&
+                    ((viewSlider != null && existing.experienceSlider == viewSlider) ||
+                     (viewLevel != null && existing.levelText == viewLevel) ||
+                     (viewXp != null && existing.experienceText == viewXp)))
+                {
+                    alreadyAdded = true;
+                    break;
+                }
+            }
+
+            if (!alreadyAdded)
+            {
+                activeEntries.Add(new ProgressionUIEntry
+                {
+                    experienceSlider = viewSlider,
+                    levelText = viewLevel,
+                    experienceText = viewXp
+                });
+            }
+        }
+    }
+
+    private bool TryCreateFromPrefab()
+    {
+        GameObject prefab = Resources.Load<GameObject>(RacePrefabResourcePath);
+        if (prefab == null)
+            return false;
+
+        GameObject instance = Instantiate(prefab);
+        instance.name = prefab.name;
+        defaultUiRoot = instance;
+
+        RaceProgressionPanelView view = instance.GetComponentInChildren<RaceProgressionPanelView>(true);
+        Slider prefabSlider = view != null ? view.experienceSlider : null;
+        Text prefabLevel = view != null ? view.levelText : null;
+        Text prefabXp = view != null ? view.experienceText : null;
+
+        if (prefabSlider == null)
+            prefabSlider = instance.GetComponentInChildren<Slider>(true);
+
+        if (prefabLevel == null || prefabXp == null)
+        {
+            Text[] texts = instance.GetComponentsInChildren<Text>(true);
+            for (int i = 0; i < texts.Length; i++)
+            {
+                if (texts[i] == null)
+                    continue;
+
+                if (prefabLevel == null && (texts[i].name == "LevelText" || texts[i].name == "LevelBadge"))
+                    prefabLevel = texts[i];
+                else if (prefabXp == null && texts[i].name == "ExperienceText")
+                    prefabXp = texts[i];
+            }
+        }
+
+        ProgressionUIEntry entry = new ProgressionUIEntry
+        {
+            experienceSlider = prefabSlider,
+            levelText = prefabLevel,
+            experienceText = prefabXp
+        };
+
+        if (!entry.IsValid)
+        {
+            Debug.LogWarning($"[PlayerProgressionDisplay] Prefab '{RacePrefabResourcePath}' has no assigned UI references.", instance);
+            Destroy(instance);
+            defaultUiRoot = null;
+            return false;
+        }
+
+        experienceSlider = prefabSlider;
+        levelText = prefabLevel;
+        experienceText = prefabXp;
+        activeEntries.Add(entry);
+        return true;
     }
 
     private void SetupGaragePlayerProfiles()
@@ -309,6 +499,7 @@ public sealed class PlayerProgressionDisplay : MonoBehaviour
     private void CreateDefaultUi()
     {
         GameObject canvasObject = new GameObject("PlayerProgressionCanvas", typeof(RectTransform));
+        defaultUiRoot = canvasObject;
         Canvas canvas = canvasObject.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 

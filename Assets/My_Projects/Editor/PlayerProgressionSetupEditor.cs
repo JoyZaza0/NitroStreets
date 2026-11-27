@@ -11,10 +11,18 @@ namespace NitroStreets.EditorTools
     [InitializeOnLoad]
     public static class PlayerProgressionSetupEditor
     {
+        private const string RaceManagerPrefabPath = "Assets/Racing_Game/Prefabs/Manager/Race_Manager.prefab";
+        private const string TopUiProgressionPanelName = "ProgressionPanel";
+
         static PlayerProgressionSetupEditor()
         {
             EditorApplication.delayCall += () =>
             {
+                if (EditorApplication.isPlayingOrWillChangePlaymode)
+                    return;
+
+                EnsureProgressionPanelInRaceManagerTopUI(false);
+
                 if (EditorSceneManager.GetActiveScene().name == "Garage")
                 {
                     SyncProgressionUI(false);
@@ -28,6 +36,181 @@ namespace NitroStreets.EditorTools
                     SyncProgressionUI(false);
                 }
             };
+        }
+
+        [MenuItem("Tools/NitroStreets/Setup Race Progression In TopUI")]
+        public static void SetupRaceProgressionInTopUIMenu()
+        {
+            EnsureProgressionPanelInRaceManagerTopUI(true);
+        }
+
+        public static void EnsureProgressionPanelInRaceManagerTopUI(bool openPrefab)
+        {
+            GameObject prefabAsset = AssetDatabase.LoadAssetAtPath<GameObject>(RaceManagerPrefabPath);
+            if (prefabAsset == null)
+            {
+                if (openPrefab)
+                    EditorUtility.DisplayDialog("NitroStreets", $"Не найден префаб: {RaceManagerPrefabPath}", "OK");
+                return;
+            }
+
+            GameObject prefabRoot = PrefabUtility.LoadPrefabContents(RaceManagerPrefabPath);
+            bool saved = false;
+            try
+            {
+                Transform topUi = FindTopUiInRaceManager(prefabRoot.transform);
+                if (topUi == null)
+                {
+                    Debug.LogWarning($"[PlayerProgression] Не найден Start_UI/TopUI внутри {RaceManagerPrefabPath}.");
+                    return;
+                }
+
+                RaceProgressionPanelView existingView = topUi.GetComponentInChildren<RaceProgressionPanelView>(true);
+                if (existingView == null)
+                {
+                    Font uiFont = FindFontInTopUi(topUi);
+                    BuildTopUiProgressionPanel(topUi, uiFont);
+                    PrefabUtility.SaveAsPrefabAsset(prefabRoot, RaceManagerPrefabPath);
+                    AssetDatabase.SaveAssets();
+                    saved = true;
+                    Debug.Log($"[PlayerProgression] Панель прогрессии добавлена в {RaceManagerPrefabPath} -> Start_UI/TopUI.");
+                }
+            }
+            finally
+            {
+                PrefabUtility.UnloadPrefabContents(prefabRoot);
+            }
+
+            if (openPrefab)
+            {
+                GameObject updatedAsset = AssetDatabase.LoadAssetAtPath<GameObject>(RaceManagerPrefabPath);
+                if (updatedAsset != null)
+                {
+                    Selection.activeObject = updatedAsset;
+                    EditorGUIUtility.PingObject(updatedAsset);
+                    AssetDatabase.OpenAsset(updatedAsset);
+                }
+
+                if (saved)
+                {
+                    EditorUtility.DisplayDialog("NitroStreets", "Панель прогрессии добавлена в Race_Manager -> Racing_UI -> Start_UI -> TopUI. Теперь можно визуально настроить её прямо рядом с Total Coins.", "OK");
+                }
+            }
+        }
+
+        private static Transform FindTopUiInRaceManager(Transform root)
+        {
+            Transform direct = root.Find("Racing_UI/Start_UI/TopUI");
+            if (direct != null)
+                return direct;
+
+            Transform[] all = root.GetComponentsInChildren<Transform>(true);
+            for (int i = 0; i < all.Length; i++)
+            {
+                if (all[i] != null && all[i].name == "TopUI" && all[i].parent != null && all[i].parent.name == "Start_UI")
+                    return all[i];
+            }
+
+            return null;
+        }
+
+        private static Font FindFontInTopUi(Transform topUi)
+        {
+            Text[] texts = topUi.GetComponentsInChildren<Text>(true);
+            for (int i = 0; i < texts.Length; i++)
+            {
+                if (texts[i] != null && texts[i].font != null)
+                    return texts[i].font;
+            }
+
+            return Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        }
+
+        private static GameObject BuildTopUiProgressionPanel(Transform topUi, Font font)
+        {
+            Image panel = CreateUiImage(TopUiProgressionPanelName, topUi, new Color(0.09f, 0.13f, 0.19f, 0.85f));
+            RectTransform panelRect = panel.rectTransform;
+            panelRect.anchorMin = new Vector2(0f, 0.5f);
+            panelRect.anchorMax = new Vector2(0f, 0.5f);
+            panelRect.pivot = new Vector2(0f, 0.5f);
+            panelRect.anchoredPosition = new Vector2(16f, 0f);
+            panelRect.sizeDelta = new Vector2(360f, 56f);
+
+            RaceProgressionPanelView view = panel.gameObject.AddComponent<RaceProgressionPanelView>();
+
+            Text levelText = CreateUiText("LevelText", panel.transform, "LV. 1",
+                new Vector2(12f, -4f), new Vector2(140f, 26f), 20, TextAnchor.MiddleLeft, font, new Color(1f, 0.84f, 0.25f, 1f));
+            levelText.fontStyle = FontStyle.Bold;
+
+            Text experienceText = CreateUiText("ExperienceText", panel.transform, "0/100 XP",
+                new Vector2(-12f, -4f), new Vector2(180f, 26f), 16, TextAnchor.MiddleRight, font, new Color(0.92f, 0.95f, 1f, 1f));
+            RectTransform expRect = experienceText.rectTransform;
+            expRect.anchorMin = new Vector2(1f, 1f);
+            expRect.anchorMax = new Vector2(1f, 1f);
+            expRect.pivot = new Vector2(1f, 1f);
+            expRect.anchoredPosition = new Vector2(-12f, -4f);
+
+            Image sliderBg = CreateUiImage("ExperienceSlider", panel.transform, new Color(0.035f, 0.055f, 0.085f, 1f));
+            RectTransform sliderRect = sliderBg.rectTransform;
+            sliderRect.anchorMin = new Vector2(0f, 0f);
+            sliderRect.anchorMax = new Vector2(1f, 0f);
+            sliderRect.pivot = new Vector2(0.5f, 0f);
+            sliderRect.anchoredPosition = new Vector2(0f, 8f);
+            sliderRect.sizeDelta = new Vector2(-24f, 14f);
+
+            Image fill = CreateUiImage("Fill", sliderBg.transform, new Color(0.12f, 0.55f, 0.9f, 1f));
+            RectTransform fillRect = fill.rectTransform;
+            fillRect.anchorMin = Vector2.zero;
+            fillRect.anchorMax = Vector2.one;
+            fillRect.offsetMin = Vector2.zero;
+            fillRect.offsetMax = Vector2.zero;
+
+            Slider slider = sliderBg.gameObject.AddComponent<Slider>();
+            slider.targetGraphic = sliderBg;
+            slider.fillRect = fillRect;
+            slider.direction = Slider.Direction.LeftToRight;
+            slider.minValue = 0f;
+            slider.maxValue = PlayerProgression.ExperiencePerLevel;
+            slider.wholeNumbers = true;
+            slider.interactable = false;
+            slider.SetValueWithoutNotify(0f);
+
+            view.experienceSlider = slider;
+            view.levelText = levelText;
+            view.experienceText = experienceText;
+
+            return panel.gameObject;
+        }
+
+        private static Image CreateUiImage(string objectName, Transform parent, Color color)
+        {
+            GameObject imageObject = new GameObject(objectName, typeof(RectTransform), typeof(CanvasRenderer));
+            imageObject.transform.SetParent(parent, false);
+            Image image = imageObject.AddComponent<Image>();
+            image.color = color;
+            return image;
+        }
+
+        private static Text CreateUiText(string objectName, Transform parent, string defaultText, Vector2 position, Vector2 size, int fontSize, TextAnchor alignment, Font font, Color color)
+        {
+            GameObject textObject = new GameObject(objectName, typeof(RectTransform), typeof(CanvasRenderer));
+            textObject.transform.SetParent(parent, false);
+
+            Text text = textObject.AddComponent<Text>();
+            text.text = defaultText;
+            text.font = font;
+            text.fontSize = fontSize;
+            text.alignment = alignment;
+            text.color = color;
+            text.raycastTarget = false;
+
+            RectTransform rectTransform = text.rectTransform;
+            rectTransform.anchorMin = new Vector2(0f, 1f);
+            rectTransform.anchorMax = new Vector2(0f, 1f);
+            rectTransform.pivot = new Vector2(0f, 1f);
+            rectTransform.anchoredPosition = position;
+            rectTransform.sizeDelta = size;
+            return text;
         }
 
         [MenuItem("Tools/NitroStreets/Sync Progression UI Across All Menus")]
