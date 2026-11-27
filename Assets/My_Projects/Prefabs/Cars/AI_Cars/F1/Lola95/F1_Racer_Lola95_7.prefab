@@ -51794,6 +51794,7 @@ GameObject:
   - component: {fileID: 1444471967036155181}
   - component: {fileID: 4687828563389918137}
   - component: {fileID: 744333338302755088}
+  - component: {fileID: 2858183134432532274}
   m_Layer: 3
   m_Name: F1_Racer_Lola95_7
   m_TagString: Racer
@@ -52093,6 +52094,28 @@ MonoBehaviour:
   delayInterval: 5
   speedMin: 50
   speedMax: 95
+--- !u!114 &2858183134432532274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6163374670097742738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c2650bc18803364cb6cbbf92ee8c986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ALIyerEdon.Racer_Nitro
+  randomizerDelay: 5
+  nitroBoost: 1
+  nitroSource: {fileID: 2770044884102268936}
+  nitroParticles:
+  - {fileID: 2814704655234661242}
+  - {fileID: 6962907811596170593}
+  - {fileID: 6688952506564033794}
+  raceIsStarted: 0
+  inSpeedLimiter: 0
+  frontHit: 0
 --- !u!1 &6186134731771595557
 GameObject:
   m_ObjectHideFlags: 0
@@ -63935,7 +63958,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6160917361195146940}
-  - component: {fileID: 8347757388532714914}
   m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
@@ -63963,19 +63985,6 @@ Transform:
   - {fileID: 2841744868750487606}
   m_Father: {fileID: 8584618098360578657}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8347757388532714914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8477539517614206120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f9ce96bd24d9ac4e87067d7d1dbd330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carID: 13
 --- !u!1 &8515417243725722567
 GameObject:
   m_ObjectHideFlags: 0

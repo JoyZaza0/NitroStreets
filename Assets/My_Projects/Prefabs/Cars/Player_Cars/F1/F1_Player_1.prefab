@@ -79906,6 +79906,7 @@ GameObject:
   - component: {fileID: 7529004681863387469}
   - component: {fileID: 4876576755864990301}
   - component: {fileID: 7934121802229217025}
+  - component: {fileID: 9216109954630882725}
   - component: {fileID: 2426923690001720526}
   - component: {fileID: 7272594147976783803}
   - component: {fileID: 5841875128310833794}
@@ -80012,16 +80013,16 @@ MonoBehaviour:
   steeringWheel: {fileID: 2950596057767597646}
   centerOfMass: {fileID: 7012471263966431996}
   currentSpeed: 0
-  enginePower: 2000
-  brakePower: 2000
+  enginePower: 1550
+  brakePower: 1550
   enginePowerTemp: 0
   nitro_Mode: 0
-  maxSteer: 35
-  maxSpeed: 150
+  maxSteer: 32
+  maxSpeed: 125
   steerSensibility: 100
   brakeFriction: 3
   handBrakeFriction: 0.6
-  originalMaxSpeed: 74
+  originalMaxSpeed: 125
   throttleInput: 0
   steerInput: 0
   reversing: 0
@@ -80237,7 +80238,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8626554009213513752}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc102b44638469645a6f0cb13c175567, type: 3}
   m_Name: 
@@ -80246,6 +80247,25 @@ MonoBehaviour:
   damageAmount: 20
   collisionVelocity: 5
   damageSmoke: {fileID: 2140114163918302426}
+--- !u!114 &9216109954630882725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8626554009213513752}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b14d9fc1e7fb2849ae7a9305611a42a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMoveDelta: 0.7
+  maxCollisionStrength: 50
+  YforceDamp: 0.1
+  demolutionRange: 1
+  impactDirManipulator: 0
+  MeshList:
+  - {fileID: 5948571085210224771, guid: ba38d56cd6f537f4088d2f13f4e0fda3, type: 3}
 --- !u!114 &2426923690001720526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80262,8 +80282,10 @@ MonoBehaviour:
   rainParticle: {fileID: 6681481360972418597}
   snowLevels:
   - Race_Track_5
+  - Race_Track_12
   rainLevels:
   - Race_Track_6
+  - Race_Track_13
 --- !u!114 &7272594147976783803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85360,7 +85382,7 @@ Transform:
   m_GameObject: {fileID: 9052320818561862892}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.017, y: 0.975, z: -4.053}
+  m_LocalPosition: {x: 0.006, y: 0.747, z: -4.511}
   m_LocalScale: {x: 2.121602, y: 2.121602, z: 2.121602}
   m_ConstrainProportionsScale: 0
   m_Children: []

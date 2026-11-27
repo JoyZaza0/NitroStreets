@@ -9176,21 +9176,6 @@ MonoBehaviour:
   - {fileID: 1018995574}
   - {fileID: 473198386}
   - {fileID: 1852819422}
-  - {fileID: 1827466947}
-  - {fileID: 2064318130}
-  - {fileID: 905759914}
-  - {fileID: 283204052}
-  - {fileID: 737448382}
-  - {fileID: 1498092631}
-  - {fileID: 2115733345}
-  - {fileID: 33301412}
-  - {fileID: 1394380956}
-  - {fileID: 1345934002}
-  - {fileID: 544001979}
-  - {fileID: 2135971363}
-  - {fileID: 1023761100}
-  - {fileID: 1547389847}
-  - {fileID: 449495929}
   nextChapterButton: {fileID: 195856077}
   previousChapterButton: {fileID: 1646564490}
   levelActivationDelay: 0.1
@@ -9689,7 +9674,7 @@ MonoBehaviour:
   modeSelectUI: {fileID: 135324216}
   TotalScores: {fileID: 1511674976}
   difficultyLevel: {fileID: 933801811}
-  levelPrices: e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000ac0d00007017000034210000f82a0000bc340000803e0000
+  levelPrices: e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000e8030000
   levelPriceText:
   - {fileID: 926380649}
   - {fileID: 707232058}
@@ -9706,21 +9691,6 @@ MonoBehaviour:
   - {fileID: 1755452376}
   - {fileID: 485229024}
   - {fileID: 222020014}
-  - {fileID: 205021634}
-  - {fileID: 1350306098}
-  - {fileID: 790695534}
-  - {fileID: 1011621916}
-  - {fileID: 868811072}
-  - {fileID: 1093006821}
-  - {fileID: 1818373050}
-  - {fileID: 145887161}
-  - {fileID: 756746362}
-  - {fileID: 1370338950}
-  - {fileID: 594753226}
-  - {fileID: 1428957069}
-  - {fileID: 1482095063}
-  - {fileID: 422652528}
-  - {fileID: 68813348}
   levelLocks:
   - {fileID: 439611967}
   - {fileID: 86147272}
@@ -9737,21 +9707,6 @@ MonoBehaviour:
   - {fileID: 668198902}
   - {fileID: 232062213}
   - {fileID: 170793212}
-  - {fileID: 973712708}
-  - {fileID: 1549717119}
-  - {fileID: 645144885}
-  - {fileID: 2126104028}
-  - {fileID: 918159737}
-  - {fileID: 349029311}
-  - {fileID: 1667726912}
-  - {fileID: 1791250939}
-  - {fileID: 1551881562}
-  - {fileID: 134091903}
-  - {fileID: 1193922667}
-  - {fileID: 1436312108}
-  - {fileID: 2068059073}
-  - {fileID: 281676714}
-  - {fileID: 1889294203}
   goldAward: {fileID: 21300000, guid: 4918cc8c79b6ea2418e72de48ba48a31, type: 3}
   bronzeAward: {fileID: 21300000, guid: 7f11ddc8f113a044883381e26a71e7f8, type: 3}
   silverAward: {fileID: 21300000, guid: ce8ff38a592242e4988fec47b8115b1d, type: 3}
@@ -9772,52 +9727,22 @@ MonoBehaviour:
   - {fileID: 1473266939}
   - {fileID: 204295304}
   - {fileID: 111846438}
-  - {fileID: 543889683}
-  - {fileID: 53902965}
-  - {fileID: 898954641}
-  - {fileID: 867829606}
-  - {fileID: 849431208}
-  - {fileID: 1671867375}
-  - {fileID: 207879347}
-  - {fileID: 1067310693}
-  - {fileID: 925735763}
-  - {fileID: 393916931}
-  - {fileID: 1584371169}
-  - {fileID: 1114176762}
-  - {fileID: 1580695209}
-  - {fileID: 1437375314}
-  - {fileID: 1552714942}
   levelNames:
-  - Career_Track_1
-  - Career_Track_2
-  - Career_Track_3
-  - Career_Track_4
-  - Career_Track_5
-  - Career_Track_6
-  - Career_Track_7
-  - Career_Track_8
-  - Career_Track_9
-  - Career_Track_10
-  - Career_Track_11
-  - Career_Track_12
-  - Career_Track_13
-  - Career_Track_14
-  - Career_Track_15
-  - Career_Track_16
-  - Career_Track_17
-  - Career_Track_18
-  - Career_Track_19
-  - Career_Track_20
-  - Career_Track_21
-  - Career_Track_22
-  - Career_Track_23
-  - Career_Track_24
-  - Career_Track_1
-  - Career_Track_2
-  - Career_Track_3
-  - Career_Track_4
-  - Career_Track_5
-  - Career_Track_6
+  - F1_Track_1
+  - F1_Track_2
+  - F1_Track_3
+  - F1_Track_4
+  - F1_Track_5
+  - F1_Track_6
+  - F1_Track_7
+  - F1_Track_8
+  - F1_Track_9
+  - F1_Track_10
+  - F1_Track_11
+  - F1_Track_12
+  - F1_Track_13
+  - F1_Track_14
+  - F1_Track_15
   gameMode: 1
   useFuelSystem: 1
   modeFuelUI: {fileID: 327476546}
@@ -28532,9 +28457,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1704923851}
   cars:
-  - {fileID: 3396710640581378345, guid: ab8a872c499d65a48bb6519149fb1249, type: 3}
-  - {fileID: 5741787595025582548, guid: 04afc23fa467f9e4296dadb7cca092b9, type: 3}
-  carPrices: 0000000050c30000
+  - {fileID: 8626554009213513752, guid: bc66910565604e24f8d7d5178a5b0f3b, type: 3}
+  - {fileID: 7461135466409824156, guid: 41885fa74bf45264aa25c7c097cbbe24, type: 3}
+  - {fileID: 7176392277842458161, guid: 375b5e43833b33443af95b5f9e610ba8, type: 3}
+  - {fileID: 6519646790346181538, guid: 79fc0fcaf1d05bc4fa47ebe5d358ba3a, type: 3}
+  - {fileID: 6496276706767330284, guid: 94549255b171f12428d57f9632628eb4, type: 3}
+  carPrices: 00000000c8af0000b0ad0100605b0300801a0600
   lockIcon: {fileID: 897815833}
   buyButton: {fileID: 1779400773}
   Price: {fileID: 831378810}
@@ -58710,7 +58638,7 @@ Transform:
   m_GameObject: {fileID: 1704923850}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.068015225, z: -0, w: -0.9976843}
-  m_LocalPosition: {x: 0.469, y: 0.8, z: 1.209}
+  m_LocalPosition: {x: 0.52, y: 0.8, z: 0.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -93901,6 +93829,7 @@ MonoBehaviour:
     levelText: {fileID: 1006232595}
     experienceText: {fileID: 1243159231}
   autoAttachToPlayerProfiles: 0
+  showOnlyOnRaceStartAndFinish: 1
 --- !u!114 &8912241036631108423
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15440,7 +15440,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3770260362763834367}
-  - component: {fileID: 416292106003187776}
   m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
@@ -15468,19 +15467,6 @@ Transform:
   - {fileID: 5728158399175289252}
   m_Father: {fileID: 7471779733568434675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &416292106003187776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712045986737477585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f9ce96bd24d9ac4e87067d7d1dbd330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carID: 13
 --- !u!1 &1983936927589334247
 GameObject:
   m_ObjectHideFlags: 0
@@ -48201,6 +48187,7 @@ GameObject:
   - component: {fileID: 4039361489129942166}
   - component: {fileID: 1809124128108935184}
   - component: {fileID: 9207811569335675813}
+  - component: {fileID: -7900026327677894888}
   m_Layer: 3
   m_Name: F1_Racer_Reyn95_6
   m_TagString: Racer
@@ -48500,6 +48487,28 @@ MonoBehaviour:
   delayInterval: 5
   speedMin: 50
   speedMax: 95
+--- !u!114 &-7900026327677894888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6767697572529983237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c2650bc18803364cb6cbbf92ee8c986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ALIyerEdon.Racer_Nitro
+  randomizerDelay: 5
+  nitroBoost: 1
+  nitroSource: {fileID: 5607103460417075358}
+  nitroParticles:
+  - {fileID: 7256976714994595734}
+  - {fileID: 5315481060142186874}
+  - {fileID: 3116281831205661896}
+  raceIsStarted: 0
+  inSpeedLimiter: 0
+  frontHit: 0
 --- !u!1 &6829584483076955824
 GameObject:
   m_ObjectHideFlags: 0

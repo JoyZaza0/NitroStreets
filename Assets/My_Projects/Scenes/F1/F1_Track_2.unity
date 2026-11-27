@@ -5322,11 +5322,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: racerPrefabs.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: playerPrefabs.Array.size
-      value: 30
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: spawnPositions.Array.size
@@ -5335,59 +5335,59 @@ PrefabInstance:
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'racerPrefabs.Array.data[0]'
       value: 
-      objectReference: {fileID: 1788107693198063407, guid: 9ddf7f2dfb6935c408b9277763b77f2a, type: 3}
+      objectReference: {fileID: 9142976019157377614, guid: 19b8bd31a372f0c429992d6fec0764fa, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'racerPrefabs.Array.data[1]'
       value: 
-      objectReference: {fileID: 6606110324176124890, guid: 1cec3df4683466246b24ecd65b55520f, type: 3}
+      objectReference: {fileID: 2787078477313716590, guid: 2db1cf8676a77ef4da9cf2fa2c0f1f54, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'racerPrefabs.Array.data[2]'
       value: 
-      objectReference: {fileID: 6194091495828986802, guid: 78d099de00358d447a1a60c9bd7ae79e, type: 3}
+      objectReference: {fileID: 2933515250049311509, guid: 078fdf3581d7e904ab32d3c71fed2d2e, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'racerPrefabs.Array.data[3]'
       value: 
-      objectReference: {fileID: 5853296121784330426, guid: 308b781dee8b0494b8979c67e54de3b7, type: 3}
+      objectReference: {fileID: 1995599660343094387, guid: a80238161313f4743bf5d1269a9300cd, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'racerPrefabs.Array.data[4]'
       value: 
-      objectReference: {fileID: 3267681787075330294, guid: 283119ea7eceec446a18eb5a4036ec12, type: 3}
+      objectReference: {fileID: 4801150677798666318, guid: a064e41fff8201c4db98232ca426dc2f, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'racerPrefabs.Array.data[5]'
       value: 
-      objectReference: {fileID: 925654178109541560, guid: a94650d1469f6164fa9ccc643a5e18fa, type: 3}
+      objectReference: {fileID: 4059058095264849695, guid: bb0d582fabc3bbe42a4769357a70982b, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'racerPrefabs.Array.data[6]'
       value: 
-      objectReference: {fileID: 5296257390084418735, guid: 483310698609fbe4fa89fc952d08d9af, type: 3}
+      objectReference: {fileID: 6757636364867884619, guid: 65745ce8991e1d74f9a098791dd88ce5, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'racerPrefabs.Array.data[7]'
       value: 
-      objectReference: {fileID: 864336037466176487, guid: 73e952d6575570d4aabecf6024cf01cc, type: 3}
+      objectReference: {fileID: 6163374670097742738, guid: ac9dc90aaa6eec642bce803b6f54519d, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'racerPrefabs.Array.data[8]'
       value: 
-      objectReference: {fileID: 4686551325962138808, guid: 9d9d8076fe666f84db7ebea0f195c38a, type: 3}
+      objectReference: {fileID: 2612984567950502775, guid: 3010662e18640a446adda15d463c5eba, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'playerPrefabs.Array.data[0]'
       value: 
-      objectReference: {fileID: 3401152097935647386, guid: 4ea3612b650f3174a92e08c3a2287dde, type: 3}
+      objectReference: {fileID: 8626554009213513752, guid: bc66910565604e24f8d7d5178a5b0f3b, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'playerPrefabs.Array.data[1]'
       value: 
-      objectReference: {fileID: 2713213277308613154, guid: 1cd8beb6ee1f934458ce77ea552fd7a9, type: 3}
+      objectReference: {fileID: 7461135466409824156, guid: 41885fa74bf45264aa25c7c097cbbe24, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'playerPrefabs.Array.data[2]'
       value: 
-      objectReference: {fileID: 5548045440871331386, guid: cd565c652471d1f40b1d3c410d5f69d8, type: 3}
+      objectReference: {fileID: 7176392277842458161, guid: 375b5e43833b33443af95b5f9e610ba8, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'playerPrefabs.Array.data[3]'
       value: 
-      objectReference: {fileID: 4253605607530112032, guid: 37575802dc780654a922397bf1ae23e1, type: 3}
+      objectReference: {fileID: 6519646790346181538, guid: 79fc0fcaf1d05bc4fa47ebe5d358ba3a, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'playerPrefabs.Array.data[4]'
       value: 
-      objectReference: {fileID: 1083236875451440490, guid: a46242e45426e41448d77e9280587176, type: 3}
+      objectReference: {fileID: 6496276706767330284, guid: 94549255b171f12428d57f9632628eb4, type: 3}
     - target: {fileID: 5468760782498716512, guid: 19ed43ac2e5ddd844a1690be66a74189, type: 3}
       propertyPath: 'playerPrefabs.Array.data[5]'
       value: 
